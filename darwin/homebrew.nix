@@ -55,6 +55,7 @@
       "dropbox"
       "figma"
       "insomnia"
+      "iterm2"
       "notion"
       "postman"
       "spotify"
