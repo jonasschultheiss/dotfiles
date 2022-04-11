@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./macos.nix ];
+  imports = [ ./macos.nix ./homebrew.nix ];
 
   networking = {
     computerName = "devenv";

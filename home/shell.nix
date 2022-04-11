@@ -20,9 +20,9 @@ let
     h = "cd ~";
     cm = "npx npkill";
     c = "cd ~/coding";
-    .. = "cd ..";
-    ...= "cd ../..";
-    .... = "cd ../../..";
+    ".." = "cd ..";
+    "..." = "cd ../..";
+    "...." = "cd ../../..";
     pwdc = "pwd | pbcopy";
     flushdns = "sudo killall -HUP mDNSResponder";
   };
@@ -102,7 +102,7 @@ in {
 
     shellInit = ''
       # Initialize homebrew
-      eval (/opt/homebrew/bin/brew shellenv)
+      eval (/usr/local/bin/brew shellenv)
       
       # Disable fish greeting
       set -g fish_greeting ""
@@ -130,22 +130,20 @@ in {
       set -g fish_color_user brgreen
       set -g fish_color_valid_path --underline
     '';
-
-    interactiveShellInit = ''
-      # Initialize Zoxide
-      # zoxide init --cmd j fish | source
-
-      # Add keys to SSH agent
-      ssh-add -A 2>/dev/null;
-    '';
-
-    functions = {
-      nvm = "bass source /opt/homebrew/opt/nvm/nvm.sh --no-use ';' nvm $argv";
-      checkip = "curl checkip.amazonaws.com"
-
-    };
-
     plugins = [
+      {
+        name = "iterm2-shell-integration";
+        src = ./iterm2_shell_integration;
+      }
+      {
+        name = "fish-kubectl-completions";
+        src = pkgs.fetchFromGitHub {
+          owner = "evanlucas";
+          repo = "fish-kubectl-completions";
+          rev = "ced676392575d618d8b80b3895cdc3159be3f628";
+          sha256 = "sha256-OYiYTW+g71vD9NWOcX1i2/TaQfAg+c2dJZ5ohwWSDCc";
+        };
+      }
       {
         name = "bass";
         src = pkgs.fetchFromGitHub {
@@ -155,7 +153,31 @@ in {
           sha256 = "0mb01y1d0g8ilsr5m8a71j6xmqlyhf8w4xjf00wkk8k41cz3ypky";
         };
       }
+      {
+        name = "nix-env";
+        src = pkgs.fetchFromGitHub {
+          owner = "lilyball";
+          repo = "nix-env.fish";
+          rev = "00c6cc762427efe08ac0bd0d1b1d12048d3ca727";
+          sha256 = "1hrl22dd0aaszdanhvddvqz3aq40jp9zi2zn0v1hjnf7fx4bgpma";
+        };
+      }
     ];
+    interactiveShellInit = ''
+      iterm2-shell-integration
+      # Initialize Zoxide
+      # zoxide init --cmd j fish | source
+
+      # Add keys to SSH agent
+      ssh-add -A 2>/dev/null;
+    '';
+
+    functions = {
+      nvm = "bass source /usr/local/opt/nvm/nvm.sh --no-use ';' nvm $argv";
+      checkip = "curl checkip.amazonaws.com";
+    };
+
+    
   };
 
   programs.zsh = {

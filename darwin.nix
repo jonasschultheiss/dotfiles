@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 
-let mainUser = "quest1onmark";
+let mainUser = "jonasschultheiss";
 in {
   imports = [ ./darwin <home-manager/nix-darwin> ];
 

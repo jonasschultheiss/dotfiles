@@ -7,61 +7,9 @@
     ];
 
   home.packages = with pkgs; [
-    # fonts
-    inter
-    hack-font
-
-    # CLIs
-    git-chglog # changelog generation
-    glow       # markdown preview
-    hexyl      # hex viewer
-    hyperfine  # benchmarking tools
-    ncdu       # disk usage
-    wget       # download files
-    tokei      # code metrics
-    speedtest-cli
-    lazydocker
-
-    # CLIs but better
-    bat      # fancy version of `cat`
-    fd       # fancy version of `find`
-    exa      # fancy version of `ls`
-    htop     # fancy version of `top`
-    mosh     # fancy version of `ssh`
-    procs    # fancy version of `ps`
-    ripgrep  # fancy version of `grep`
-    httpie   # fancy version of `curl`
-    dog      # fancy version of `dig`
-    broot    # fancy version of `tree`
-    duf      # fancy version of `df`
-    dust     # fancy version of `du`
-    bottom   # fancy version of `top`
-    tealdeer # rust implementation of `tldr`
-
-    # Languages
-    nodejs-16_x yarn
-    rustup
-    go
-    elixir
-    stylua
-
-    # Nix-related
     home-manager # system package manager
     comma        # any cli you may need
 
-  ] ++ (with nodePackages; [
-    # NPM Packages
-    neovim    # neovim nodejs provider
-    pnpm      # disk-efficient npm
-    prettier  # code formatter
-    eslint    # code linter
-    np        # better 'npm publish'
-    create-react-app
-    vercel
-    typescript
-    # @antfu/ni # use the right package manager
-  ]) ++ lib.optionals stdenv.isDarwin [
-    m-cli     # useful macos CLI commands
   ];
 
   # This value determines the Home Manager release that your

@@ -2,7 +2,7 @@
 
 {
   system.defaults = {
-        LaunchServices = {
+      LaunchServices = {
       LSQuarantine = false;
     };
 
@@ -47,7 +47,7 @@
       showhidden = true;
       show-recents = false;
       static-only = true;
-      tilesize = 16;
+      tilesize = 32;
       launchanim = false;
     };
 
@@ -70,7 +70,7 @@
 
     smb = {
       NetBIOSName = "devenv";
-      ServerDescription = "devenv"
-    }
-  }
+      ServerDescription = "devenv";
+    };
+  };
 }
