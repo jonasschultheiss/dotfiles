@@ -25,6 +25,7 @@ let
     "...." = "cd ../../..";
     pwdc = "pwd | pbcopy";
     flushdns = "sudo killall -HUP mDNSResponder";
+    dotfiles = "code ~/coding/dotfiles";
   };
 
   shellAbbrs = {
@@ -102,7 +103,8 @@ in {
 
     shellInit = ''
       # Initialize homebrew
-      eval (/usr/local/bin/brew shellenv)
+      eval (/opt/homebrew/bin/brew shellenv)
+
       starship init fish | source
       
       # Disable fish greeting
@@ -165,16 +167,16 @@ in {
       }
     ];
     interactiveShellInit = ''
-      iterm2-shell-integration
       # Initialize Zoxide
       # zoxide init --cmd j fish | source
+      # iterm2-shell-integration
 
       # Add keys to SSH agent
       ssh-add -A 2>/dev/null;
     '';
 
     functions = {
-      nvm = "bass source /usr/local/opt/nvm/nvm.sh --no-use ';' nvm $argv";
+      nvm = "bass source /opt/homebrew/opt/nvm/nvm.sh --no-use ';' nvm $argv";
       checkip = "curl checkip.amazonaws.com";
     };
 

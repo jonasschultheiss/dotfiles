@@ -43,6 +43,7 @@
       "yarn"
     ];
     casks = [
+      "alfred"
       "appcleaner"
       "brave-browser"
       "deepl"
@@ -74,7 +75,6 @@
     ];
     masApps = {
       "1Password 7 - Password Manager" = 1333542190;
-      "Alfred" = 405843582;
       "Amphetamine" = 937984704;
       "Jira Cloud by Atlassian" = 1475897096;
       "Magnet" = 441258766;
