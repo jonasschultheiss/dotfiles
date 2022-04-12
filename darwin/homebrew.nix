@@ -44,6 +44,7 @@
     ];
     casks = [
       "appcleaner"
+      "brave-browser"
       "deepl"
       "discord"
       "docker"
@@ -55,6 +56,7 @@
       "font-jetbrains-mono-nerd-font"
       "font-jetbrains-mono"
       "font-roboto"
+      "github"
       "insomnia"
       "iterm2"
       "ngrok"
