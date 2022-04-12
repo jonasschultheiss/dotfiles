@@ -35,6 +35,7 @@
       "ripgrep"
       "speedtest-cli"
       "starship"
+      "svn"
       "tealdeer"
       "tokei"
       "typescript"
