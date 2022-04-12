@@ -60,7 +60,7 @@ in {
   };
 
   programs.starship = {
-    enable = true;
+    enable = false;
     settings = {
       format = "$battery$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$python$character";
 
@@ -103,6 +103,7 @@ in {
     shellInit = ''
       # Initialize homebrew
       eval (/usr/local/bin/brew shellenv)
+      starship init fish | source
       
       # Disable fish greeting
       set -g fish_greeting ""

@@ -41,6 +41,7 @@
       "procs"
       "ripgrep"
       "speedtest-cli"
+      "starship"
       "tealdeer"
       "tokei"
       "typescript"
