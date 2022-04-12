@@ -10,7 +10,7 @@
 
   programs.git = {
     enable = true;
-    userName = "Jonas Schultheiss";
+    userName = "jonasschultheiss";
     userEmail = "jonas.raphael.schultheiss@gmail.com";
     package = pkgs.gitAndTools.gitFull;
 
