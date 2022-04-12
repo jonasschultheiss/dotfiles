@@ -16,12 +16,6 @@
       "eslint"
       "exa"
       "fd"
-      "font-hack-nerd-font"
-      "font-hack"
-      "font-inter"
-      "font-jetbrains-mono-nerd-font"
-      "font-jetbrains-mono"
-      "font-roboto"
       "glow"
       "heroku"
       "hexyl"
@@ -55,6 +49,12 @@
       "docker"
       "dropbox"
       "figma"
+      "font-hack-nerd-font"
+      "font-hack"
+      "font-inter"
+      "font-jetbrains-mono-nerd-font"
+      "font-jetbrains-mono"
+      "font-roboto"
       "insomnia"
       "iterm2"
       "notion"
@@ -64,9 +64,9 @@
       "visual-studio-code"
     ];
     taps = [
-      "homebrew/cask-fonts"
       "auth0/auth0-cli"
-      "jesseduffield/lazydocker"
+      "heroku/brew"
+      "homebrew/cask-fonts"
       "ubuntu/microk8s"
     ];
     masApps = {
