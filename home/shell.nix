@@ -107,6 +107,8 @@ in {
 
       starship init fish | source
       
+      nvm use default
+
       # Disable fish greeting
       set -g fish_greeting ""
 

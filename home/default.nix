@@ -6,6 +6,17 @@
     ./shell.nix
     ];
 
+  home.sessionVariables = {
+    ANDROID_SDK_ROOT = "$HOME/Library/Android/sdk";
+  };
+
+  home.sessionPath = [
+    "$ANDROID_SDK_ROOT/emulator"
+    "$ANDROID_SDK_ROOT/platform-tools"
+  ];
+
+
+
   home.packages = with pkgs; [
     home-manager # system package manager
     comma        # any cli you may need

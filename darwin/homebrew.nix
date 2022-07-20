@@ -6,7 +6,14 @@
     autoUpdate = true;
     cleanup = "zap";
     brews = [
+      "llvm"
+      "heroku-node"
+      "python@3.9"
+      "cocoapods"
+      "swagger-codegen"
+      "nats-io/nats-tools/nats"
       "auth0"
+      "starship"
       "bat"
       "bottom"
       "broot"
@@ -34,15 +41,19 @@
       "procs"
       "ripgrep"
       "speedtest-cli"
-      "starship"
       "svn"
       "tealdeer"
       "tokei"
       "typescript"
       "wget"
       "yarn"
+      "redis"
+      "release-it"
+      "openjdk@11"
     ];
     casks = [
+      "malwarebytes"
+      "wireshark"
       "alfred"
       "appcleaner"
       "brave-browser"
@@ -66,12 +77,15 @@
       "spotify"
       "steam"
       "visual-studio-code"
+      "react-native-debugger"
     ];
     taps = [
       "auth0/auth0-cli"
       "heroku/brew"
       "homebrew/cask-fonts"
       "ubuntu/microk8s"
+      "homebrew/cask"
+      "nats-io/nats-tools"
     ];
     masApps = {
       "1Password 7 - Password Manager" = 1333542190;

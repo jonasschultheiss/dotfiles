@@ -49,6 +49,7 @@
       static-only = true;
       tilesize = 32;
       launchanim = false;
+      mru-spaces = false;
     };
 
     finder = {
