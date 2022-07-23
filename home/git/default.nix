@@ -3,7 +3,6 @@
 {
   home.packages = with pkgs.gitAndTools; [
     diff-so-fancy
-    hub
     tig
     gh
   ];

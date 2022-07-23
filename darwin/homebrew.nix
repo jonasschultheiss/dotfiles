@@ -13,7 +13,6 @@
       "swagger-codegen"
       "nats-io/nats-tools/nats"
       "auth0"
-      "starship"
       "bat"
       "bottom"
       "broot"
