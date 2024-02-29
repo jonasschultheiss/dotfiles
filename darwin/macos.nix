@@ -36,13 +36,15 @@
     };
 
     alf = {
+      globalstate = 1;
       stealthenabled = 1;
     };
 
     dock = {
+      # TODO: Fix these
+      # autohide-delay = "0";
+      # autohide-time-modifier = "1";
       autohide = true;
-      autohide-delay = "0.0";
-      autohide-time-modifier = "1.0";
       orientation = "left";
       showhidden = true;
       show-recents = false;
@@ -66,7 +68,7 @@
     };
 
     screencapture = {
-      location = "~/screenshots";
+      location = "/Users/jonasschultheiss/screenshots";
     };
 
     smb = {

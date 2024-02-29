@@ -3,64 +3,65 @@
 {
   homebrew = {
     enable = true;
-    autoUpdate = true;
-    cleanup = "zap";
+    onActivation = {
+      cleanup = "zap";
+      autoUpdate = true;
+      upgrade = true;
+    };
     brews = [
-      "llvm"
-      "heroku-node"
-      "python@3.9"
-      "cocoapods"
-      "swagger-codegen"
-      "nats-io/nats-tools/nats"
-      "auth0"
       "bat"
       "bottom"
       "broot"
+      "cpanm"
       "dog"
       "duf"
       "dust"
       "eslint"
       "exa"
+      "exiv2"
       "fd"
+      "gh"
       "glow"
-      "heroku"
+      "gnupg"
       "hexyl"
       "htop"
       "httpie"
       "hub"
       "hyperfine"
-      "kubernetes-cli"
-      "lazydocker"
+      "latexindent"
+      "llvm"
       "m-cli"
-      "microk8s"
       "mosh"
       "ncdu"
       "nvm"
+      "openjdk@11"
+      "packer"
+      "perl"
       "prettier"
       "procs"
+      "python@3.9"
+      "release-it"
       "ripgrep"
       "speedtest-cli"
       "svn"
       "tealdeer"
+      "terraform"
       "tokei"
       "typescript"
+      "vercel-cli"
       "wget"
       "yarn"
-      "redis"
-      "release-it"
-      "openjdk@11"
     ];
     casks = [
-      "malwarebytes"
-      "wireshark"
-      "alfred"
+      "1password-cli"
       "appcleaner"
       "brave-browser"
       "deepl"
       "discord"
       "docker"
-      "dropbox"
       "figma"
+      "font-geist-mono"
+      "font-geist"
       "font-hack-nerd-font"
       "font-hack"
       "font-inter"
@@ -70,26 +71,23 @@
       "github"
       "insomnia"
       "iterm2"
+      "malwarebytes"
       "ngrok"
       "notion"
       "postman"
+      "raycast"
       "spotify"
       "steam"
       "visual-studio-code"
-      "react-native-debugger"
+      "wireshark"
+      "zed"
     ];
     taps = [
-      "auth0/auth0-cli"
       "heroku/brew"
       "homebrew/cask-fonts"
-      "ubuntu/microk8s"
-      "homebrew/cask"
-      "nats-io/nats-tools"
     ];
     masApps = {
-      "1Password 7 - Password Manager" = 1333542190;
-      "Amphetamine" = 937984704;
-      "Jira Cloud by Atlassian" = 1475897096;
+      # "Fantastical - Calendar & Tasks" = 975937182;
       "Magnet" = 441258766;
       "Microsoft Excel" = 462058435;
       "Microsoft PowerPoint" = 462062816;

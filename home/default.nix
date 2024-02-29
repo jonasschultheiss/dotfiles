@@ -11,11 +11,10 @@
   };
 
   home.sessionPath = [
+    "/usr/local/texlive/2022"
     "$ANDROID_SDK_ROOT/emulator"
     "$ANDROID_SDK_ROOT/platform-tools"
   ];
-
-
 
   home.packages = with pkgs; [
     home-manager # system package manager
