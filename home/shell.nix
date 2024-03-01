@@ -4,7 +4,7 @@ let
   shellAliases = {
     # Apps... but better
     git = "hub";
-    ls = "exa";
+    ls = "eza";
     cat = "bat";
     find = "fd";
 
@@ -13,7 +13,7 @@ let
     ll = "ls -la";
 
     # misc
-    tree = "exa --tree";
+    tree = "eza --tree";
     reload = "exec fish";
     oo = "open .";
     inflate="ruby -r zlib -e \"STDOUT.write Zlib::Inflate.inflate(STDIN.read)\"";
@@ -26,6 +26,7 @@ let
     pwdc = "pwd | pbcopy";
     flushdns = "sudo killall -HUP mDNSResponder";
     dotfiles = "code ~/coding/dotfiles";
+    dark = "osascript -e 'tell application \"System Events\" to tell appearance preferences to set dark mode to not dark mode'";
   };
 
   shellAbbrs = {
