@@ -96,7 +96,7 @@ darwin_build() {
   
   # Rebuild darwin
   export NIX_PATH=$HOME/.nix-defexpr/channels:$NIX_PATH
-  darwin-rebuild switch -I "darwin-config=$HOME/.config/nixpkgs/darwin.nix"
+  darwin-rebuild switch -I "darwin-config=$HOME/.config/nixpkgs/darwin-configuration.nix"
 }
 
 # Installation flow

@@ -19,8 +19,8 @@ in {
   services.nix-daemon.enable = true;
   nix.useDaemon = true;
 
-  # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin.nix
-  environment.darwinConfig = "$HOME/.config/nixpkgs/darwin.nix";
+  # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin-configuration.nix
+  environment.darwinConfig = "$HOME/.config/nixpkgs/darwin-configuration.nix";
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
