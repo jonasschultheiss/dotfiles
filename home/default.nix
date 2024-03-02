@@ -6,20 +6,19 @@
     ./shell.nix
     ];
 
-  home.sessionVariables = {
-    ANDROID_SDK_ROOT = "$HOME/Library/Android/sdk";
-  };
+  # home.sessionVariables = {
+  #   ANDROID_SDK_ROOT = "$HOME/Library/Android/sdk";
+  # };
 
-  home.sessionPath = [
-    "/usr/local/texlive/2022"
-    "$ANDROID_SDK_ROOT/emulator"
-    "$ANDROID_SDK_ROOT/platform-tools"
-  ];
+  # home.sessionPath = [
+  #   "/usr/local/texlive/2022"
+  #   "$ANDROID_SDK_ROOT/emulator"
+  #   "$ANDROID_SDK_ROOT/platform-tools"
+  # ];
 
   home.packages = with pkgs; [
     home-manager # system package manager
     comma        # any cli you may need
-
   ];
 
   # This value determines the Home Manager release that your
