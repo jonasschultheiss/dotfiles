@@ -46,6 +46,8 @@ let
     gf = "git fetch";
     gfc = "git findcommit";
     gfm = "git findmessage";
+    p = "pnpm";
+    y = "yarn";
   };
 in {
   home.packages = with pkgs; [
@@ -106,8 +108,15 @@ in {
       # Initialize homebrew
       eval (/opt/homebrew/bin/brew shellenv)
 
+      # Configure Java
+      # TODO: Add a version manager for openjdk versions
+      fish_add_path /opt/homebrew/opt/openjdk@17/bin
+      set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk@17/include"
+      set -gx JAVA_HOME "/opt/homebrew/Cellar/openjdk@17/17.0.10/libexec/openjdk.jdk/Contents/Home"
+
+
       # Configure PNPM
-      set -gx PNPM_HOME "/Users/matchai/Library/pnpm"
+      set -gx PNPM_HOME "/Users/jonasschultheiss/Library/pnpm"
       set -gx PATH "$PNPM_HOME" $PATH
 
       starship init fish | source
