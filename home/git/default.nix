@@ -9,9 +9,14 @@
 
   programs.git = {
     enable = true;
-    userName = "jonasschultheiss";
+    userName = "Jonas Schultheiss";
     userEmail = "jonas.raphael.schultheiss@gmail.com";
     package = pkgs.gitAndTools.gitFull;
+
+    signing = {
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIEkKRKYGIagUWR53s7ZH5lrn7O1ALWqbjALwrIm13Rv";
+      signByDefault = true;
+    };
 
     ignores = [
       ".cache/"
@@ -34,6 +39,12 @@
     };
 
     extraConfig = {
+      # SSH signing
+      commit.gpgsign = true;
+      gpg.format = "ssh";
+      gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      gpg.ssh.allowedSignersFile = builtins.toPath ./allowed-signers;
+
       commit.template = builtins.toPath ./git-message;
 
       # If no upstream branch is specified, push to the branch with the same
