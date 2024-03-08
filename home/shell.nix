@@ -106,6 +106,10 @@ in {
       # Initialize homebrew
       eval (/opt/homebrew/bin/brew shellenv)
 
+      # Configure PNPM
+      set -gx PNPM_HOME "/Users/matchai/Library/pnpm"
+      set -gx PATH "$PNPM_HOME" $PATH
+
       starship init fish | source
       
       nvm use default
