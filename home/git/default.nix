@@ -7,6 +7,19 @@
     gh
   ];
 
+  # programs.ssh = {
+  #   knownHosts = [
+  #     {
+  #       hostNames = [ "*" ];
+  #       publicKeyFile = ./pubkeys/myhost_ssh_host_dsa_key.pub;
+  #     }
+  #     {
+  #       hostNames = [ "myhost2" ];
+  #       publicKeyFile = ./pubkeys/myhost2_ssh_host_dsa_key.pub;
+  #     }
+  #   ]
+  # }
+
   programs.git = {
     enable = true;
     userName = "Jonas Schultheiss";
