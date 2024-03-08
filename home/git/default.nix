@@ -40,6 +40,7 @@
 
     extraConfig = {
       # SSH signing
+      # test
       commit.gpgsign = true;
       gpg.format = "ssh";
       gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
