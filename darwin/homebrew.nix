@@ -78,10 +78,11 @@
       "postman"
       "raycast"
       "spotify"
-      # "steam"
+      "tableplus"
       "visual-studio-code"
       "wireshark"
       "zed"
+      # "steam"
     ];
     taps = [
       "heroku/brew"
