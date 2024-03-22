@@ -9,6 +9,7 @@
       upgrade = true;
     };
     brews = [
+      "angular-cli"
       "bat"
       "bottom"
       "broot"
@@ -56,7 +57,6 @@
       "yarn"
     ];
     casks = [
-      "logi-options-plus"
       "1password-cli"
       "appcleaner"
       "brave-browser"
@@ -75,6 +75,7 @@
       "github"
       "insomnia"
       "iterm2"
+      "logi-options-plus"
       "malwarebytes"
       "ngrok"
       "notion"
