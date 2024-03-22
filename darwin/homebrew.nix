@@ -56,6 +56,7 @@
       "yarn"
     ];
     casks = [
+      "logi-options-plus"
       "1password-cli"
       "appcleaner"
       "brave-browser"
