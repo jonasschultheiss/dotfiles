@@ -83,6 +83,7 @@
       "raycast"
       "spotify"
       "tableplus"
+      "teamviewer"
       "visual-studio-code"
       "wireshark"
       "zed"
