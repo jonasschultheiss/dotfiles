@@ -60,6 +60,7 @@
       "1password-cli"
       "appcleaner"
       "brave-browser"
+      "citrix-workspace"
       "deepl"
       "discord"
       "docker"
