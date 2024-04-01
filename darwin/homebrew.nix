@@ -62,7 +62,6 @@
       "brave-browser"
       "citrix-workspace"
       "deepl"
-      "discord"
       "docker"
       "figma"
       "font-geist-mono"
@@ -86,7 +85,6 @@
       "tableplus"
       "teamviewer"
       "visual-studio-code"
-      "wireshark"
       "zed"
     ];
     taps = [
