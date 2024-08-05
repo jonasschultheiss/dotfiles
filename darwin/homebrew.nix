@@ -57,6 +57,7 @@
       "yarn"
     ];
     casks = [
+      "displaylink"
       "1password-cli"
       "appcleaner"
       "brave-browser"

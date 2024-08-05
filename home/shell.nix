@@ -110,9 +110,13 @@ in {
 
       # Configure Java
       # TODO: Add a version manager for openjdk versions
-      fish_add_path /opt/homebrew/opt/openjdk@17/bin
+      # fish_add_path /opt/homebrew/opt/openjdk@17/bin
       set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk@17/include"
-      set -gx JAVA_HOME "/opt/homebrew/Cellar/openjdk@17/17.0.10/libexec/openjdk.jdk/Contents/Home"
+      set -gx JAVA_HOME /opt/homebrew/opt/openjdk@17
+      set -gx PATH $JAVA_HOME/bin $PATH
+
+
+      set -gx CHROME_BIN "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
 
 
       # Configure PNPM
