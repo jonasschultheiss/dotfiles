@@ -10,7 +10,7 @@
   programs.git = {
     enable = true;
     userName = "Jonas Schultheiss";
-    userEmail = "jonas.raphael.schultheiss@gmail.com";
+    userEmail = "complaint@jonasschultheiss.dev";
     package = pkgs.gitAndTools.gitFull;
 
     signing = {

@@ -10,6 +10,7 @@
     };
     brews = [
       "angular-cli"
+      "asciidoctor"
       "bat"
       "bottom"
       "broot"
@@ -21,6 +22,7 @@
       "exiv2"
       "eza"
       "fd"
+      "ffmpeg"
       "gh"
       "glow"
       "gnupg"
@@ -57,12 +59,12 @@
       "yarn"
     ];
     casks = [
-      "displaylink"
       "1password-cli"
       "appcleaner"
       "brave-browser"
       "citrix-workspace"
       "deepl"
+      "displaylink"
       "docker"
       "figma"
       "font-geist-mono"
@@ -76,7 +78,7 @@
       "github"
       "insomnia"
       "iterm2"
-      "logi-options-plus"
+      "logi-options+"
       "malwarebytes"
       "ngrok"
       "notion"
