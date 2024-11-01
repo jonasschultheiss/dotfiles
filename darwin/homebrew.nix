@@ -72,6 +72,7 @@
       "figma"
       # "font-geist-mono"
       # "font-geist"
+      "linear-linear"
       "font-hack-nerd-font"
       "font-hack"
       "font-inter"
