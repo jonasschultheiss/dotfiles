@@ -85,6 +85,7 @@
       "spotify"
       "tableplus"
       "teamviewer"
+      "linear-linear"
       "visual-studio-code"
       "wireshark"
       "zed"
