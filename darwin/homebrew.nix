@@ -9,6 +9,7 @@
       upgrade = true;
     };
     brews = [
+      "telnet"
       "angular-cli"
       "asciidoctor"
       "bat"
@@ -48,6 +49,7 @@
       "python@3.9"
       "release-it"
       "ripgrep"
+      "sherlock"
       "speedtest-cli"
       "svn"
       "tealdeer"
@@ -59,6 +61,7 @@
       "yarn"
     ];
     casks = [
+      "languagetool"
       "1password-cli"
       "appcleaner"
       "brave-browser"
@@ -67,8 +70,8 @@
       "displaylink"
       "docker"
       "figma"
-      "font-geist-mono"
-      "font-geist"
+      # "font-geist-mono"
+      # "font-geist"
       "font-hack-nerd-font"
       "font-hack"
       "font-inter"
@@ -78,6 +81,7 @@
       "github"
       "insomnia"
       "iterm2"
+      "keepassxc"
       "logi-options+"
       "malwarebytes"
       "ngrok"

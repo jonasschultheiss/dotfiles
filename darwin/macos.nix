@@ -72,8 +72,8 @@
     };
 
     smb = {
-      NetBIOSName = "devenv";
-      ServerDescription = "devenv";
+      NetBIOSName = "devenv-pax";
+      ServerDescription = "devenv-pax";
     };
   };
 }
