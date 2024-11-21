@@ -9,7 +9,6 @@
       upgrade = true;
     };
     brews = [
-      "telnet"
       "angular-cli"
       "asciidoctor"
       "bat"
@@ -53,6 +52,7 @@
       "speedtest-cli"
       "svn"
       "tealdeer"
+      "telnet"
       "terraform"
       "tokei"
       "typescript"
@@ -61,18 +61,18 @@
       "yarn"
     ];
     casks = [
-      "languagetool"
       "1password-cli"
       "appcleaner"
       "brave-browser"
       "citrix-workspace"
+      # "cursor"
+      "discord"
+      "todoist"
       "deepl"
       "displaylink"
+      "whatsapp"
       "docker"
       "figma"
-      # "font-geist-mono"
-      # "font-geist"
-      "linear-linear"
       "font-hack-nerd-font"
       "font-hack"
       "font-inter"
@@ -83,8 +83,11 @@
       "insomnia"
       "iterm2"
       "keepassxc"
+      "languagetool"
+      "linear-linear"
       "logi-options+"
       "malwarebytes"
+      "microsoft-teams"
       "ngrok"
       "notion"
       "postman"
@@ -94,9 +97,10 @@
       "teamviewer"
       "visual-studio-code"
       "zed"
+      # "font-geist-mono"
+      # "font-geist"
     ];
     taps = [
-      "heroku/brew"
       "homebrew/cask-fonts"
     ];
     masApps = {
@@ -104,6 +108,7 @@
       "Microsoft PowerPoint" = 462062816;
       "Microsoft Word" = 462054704;
       "Xcode" = 497799835;
+      "Cisco Secure Client" = 1135064690;
     };
   };
 }

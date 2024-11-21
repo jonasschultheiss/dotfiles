@@ -54,7 +54,7 @@
       push.default = "current";
 
       core = {
-        editor = "code --wait";
+        editor = "cursor --wait";
         pager = "diff-so-fancy | less --tabs=4 -RFX";
       };
 
