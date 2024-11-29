@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   shellAliases = {
@@ -16,7 +16,7 @@ let
     tree = "eza --tree";
     reload = "exec fish";
     oo = "open .";
-    inflate="ruby -r zlib -e \"STDOUT.write Zlib::Inflate.inflate(STDIN.read)\"";
+    inflate = "ruby -r zlib -e \"STDOUT.write Zlib::Inflate.inflate(STDIN.read)\"";
     h = "cd ~";
     cm = "npx npkill";
     c = "cd ~/coding";
@@ -43,21 +43,24 @@ let
     gd = "git diff";
     gds = "git diff --staged";
     gr = "git rebase -i HEAD~15";
-    gf = "git fetch";
+    gf = "git fetch --prune";
     gfc = "git findcommit";
     gfm = "git findmessage";
     p = "pnpm";
     y = "yarn";
   };
-in {
+in
+{
   home.packages = with pkgs; [
     fzf
     zoxide
+    nil
+    nixpkgs-fmt
   ];
 
   programs.zoxide = {
     enable = true;
-    options = ["--cmd j"];
+    options = [ "--cmd j" ];
     enableBashIntegration = true;
     enableFishIntegration = true;
     enableZshIntegration = true;
@@ -198,9 +201,41 @@ in {
     functions = {
       nvm = "bass source /opt/homebrew/opt/nvm/nvm.sh --no-use ';' nvm $argv";
       checkip = "curl checkip.amazonaws.com";
-    };
+      gfb = ''
+        # Check if ticket number was provided
+        if test (count $argv) -ne 1
+          echo "Please provide a ticket number"
+          echo "Usage: fb <ticket-number>"
+          return 1
+        end
+        
+        # Switch to main, fetch, and pull
+        git checkout main
+        git fetch --prune
+        git pull
+        
+        # Create and checkout new feature branch
+        git checkout -b "feature/SWE-$argv[1]"
+      '';
 
-    
+      sync = ''
+        # Store current branch name
+        set current_branch (git rev-parse --abbrev-ref HEAD)
+        
+        # Fetch and prune
+        git fetch --prune
+        
+        # Checkout main and pull
+        git checkout main
+        git pull
+        
+        # Return to feature branch and merge
+        git checkout $current_branch
+        git merge main
+        
+        echo "Synced main into $current_branch"
+      '';
+    };
   };
 
   programs.zsh = {
