@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs.gitAndTools; [
@@ -10,7 +10,7 @@
   programs.git = {
     enable = true;
     userName = "Jonas Schultheiss";
-    userEmail = "jonas.raphael.schultheiss@gmail.com";
+    userEmail = "complaint@jonasschultheiss.dev";
     package = pkgs.gitAndTools.gitFull;
 
     signing = {
@@ -54,7 +54,7 @@
       push.default = "current";
 
       core = {
-        editor = "code --wait";
+        editor = "cursor --wait";
         pager = "diff-so-fancy | less --tabs=4 -RFX";
       };
 

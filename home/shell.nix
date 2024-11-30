@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   shellAliases = {
@@ -16,7 +16,7 @@ let
     tree = "eza --tree";
     reload = "exec fish";
     oo = "open .";
-    inflate="ruby -r zlib -e \"STDOUT.write Zlib::Inflate.inflate(STDIN.read)\"";
+    inflate = "ruby -r zlib -e \"STDOUT.write Zlib::Inflate.inflate(STDIN.read)\"";
     h = "cd ~";
     cm = "npx npkill";
     c = "cd ~/coding";
@@ -25,7 +25,7 @@ let
     "...." = "cd ../../..";
     pwdc = "pwd | pbcopy";
     flushdns = "sudo killall -HUP mDNSResponder";
-    dotfiles = "code ~/.config/nixpkgs";
+    dotfiles = "cursor ~/.config/nixpkgs";
     dark = "osascript -e 'tell application \"System Events\" to tell appearance preferences to set dark mode to not dark mode'";
   };
 
@@ -43,21 +43,24 @@ let
     gd = "git diff";
     gds = "git diff --staged";
     gr = "git rebase -i HEAD~15";
-    gf = "git fetch";
+    gf = "git fetch --prune";
     gfc = "git findcommit";
     gfm = "git findmessage";
     p = "pnpm";
     y = "yarn";
   };
-in {
+in
+{
   home.packages = with pkgs; [
     fzf
     zoxide
+    nil
+    nixpkgs-fmt
   ];
 
   programs.zoxide = {
     enable = true;
-    options = ["--cmd j"];
+    options = [ "--cmd j" ];
     enableBashIntegration = true;
     enableFishIntegration = true;
     enableZshIntegration = true;
@@ -110,9 +113,13 @@ in {
 
       # Configure Java
       # TODO: Add a version manager for openjdk versions
-      fish_add_path /opt/homebrew/opt/openjdk@17/bin
+      # fish_add_path /opt/homebrew/opt/openjdk@17/bin
       set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk@17/include"
-      set -gx JAVA_HOME "/opt/homebrew/Cellar/openjdk@17/17.0.10/libexec/openjdk.jdk/Contents/Home"
+      set -gx JAVA_HOME /opt/homebrew/opt/openjdk@17
+      set -gx PATH $JAVA_HOME/bin $PATH
+
+
+      set -gx CHROME_BIN "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
 
 
       # Configure PNPM
@@ -194,9 +201,41 @@ in {
     functions = {
       nvm = "bass source /opt/homebrew/opt/nvm/nvm.sh --no-use ';' nvm $argv";
       checkip = "curl checkip.amazonaws.com";
-    };
+      gfb = ''
+        # Check if ticket number was provided
+        if test (count $argv) -ne 1
+          echo "Please provide a ticket number"
+          echo "Usage: fb <ticket-number>"
+          return 1
+        end
+        
+        # Switch to main, fetch, and pull
+        git checkout main
+        git fetch --prune
+        git pull
+        
+        # Create and checkout new feature branch
+        git checkout -b "feature/SWE-$argv[1]"
+      '';
 
-    
+      sync = ''
+        # Store current branch name
+        set current_branch (git rev-parse --abbrev-ref HEAD)
+        
+        # Fetch and prune
+        git fetch --prune
+        
+        # Checkout main and pull
+        git checkout main
+        git pull
+        
+        # Return to feature branch and merge
+        git checkout $current_branch
+        git merge main
+        
+        echo "Synced main into $current_branch"
+      '';
+    };
   };
 
   programs.zsh = {

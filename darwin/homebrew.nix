@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   homebrew = {
@@ -10,6 +10,7 @@
     };
     brews = [
       "angular-cli"
+      "asciidoctor"
       "bat"
       "bottom"
       "broot"
@@ -21,6 +22,7 @@
       "exiv2"
       "eza"
       "fd"
+      "ffmpeg"
       "gh"
       "glow"
       "gnupg"
@@ -46,9 +48,11 @@
       "python@3.9"
       "release-it"
       "ripgrep"
+      "sherlock"
       "speedtest-cli"
       "svn"
       "tealdeer"
+      "telnet"
       "terraform"
       "tokei"
       "typescript"
@@ -61,12 +65,14 @@
       "appcleaner"
       "brave-browser"
       "citrix-workspace"
-      "deepl"
+      # "cursor"
       "discord"
+      "todoist"
+      "deepl"
+      "displaylink"
+      "whatsapp"
       "docker"
       "figma"
-      "font-geist-mono"
-      "font-geist"
       "font-hack-nerd-font"
       "font-hack"
       "font-inter"
@@ -76,8 +82,12 @@
       "github"
       "insomnia"
       "iterm2"
-      "logi-options-plus"
+      "keepassxc"
+      "languagetool"
+      "linear-linear"
+      "logi-options+"
       "malwarebytes"
+      "microsoft-teams"
       "ngrok"
       "notion"
       "postman"
@@ -87,12 +97,11 @@
       "teamviewer"
       "linear-linear"
       "visual-studio-code"
-      "wireshark"
       "zed"
-      # "steam"
+      # "font-geist-mono"
+      # "font-geist"
     ];
     taps = [
-      "heroku/brew"
       "homebrew/cask-fonts"
     ];
     masApps = {
@@ -100,6 +109,7 @@
       "Microsoft PowerPoint" = 462062816;
       "Microsoft Word" = 462054704;
       "Xcode" = 497799835;
+      "Cisco Secure Client" = 1135064690;
     };
   };
 }
