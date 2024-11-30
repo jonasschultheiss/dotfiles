@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   system.defaults = {
-      LaunchServices = {
+    LaunchServices = {
       LSQuarantine = false;
     };
 

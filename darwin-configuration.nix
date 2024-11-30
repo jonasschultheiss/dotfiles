@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let mainUser = "jonasschultheiss";
 in {
@@ -9,7 +9,7 @@ in {
     shell = pkgs.fish;
   };
   programs.fish.enable = true;
-  
+
   home-manager = {
     users.${mainUser} = import ./home;
     useGlobalPkgs = true;
