@@ -8,7 +8,13 @@ in {
     home = "/Users/${mainUser}";
     shell = pkgs.fish;
   };
+  
+  # Add fish to system shells
+  environment.shells = with pkgs; [ fish ];
   programs.fish.enable = true;
+  
+  # Enable fish as login shell
+  environment.loginShell = pkgs.fish;
 
   home-manager = {
     users.${mainUser} = import ./home;
