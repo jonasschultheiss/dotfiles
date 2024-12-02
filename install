@@ -34,6 +34,7 @@ install_nix() {
     sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
 
     # Update local shell
+    source /etc/bashrc
     source /Users/jonasschultheiss/.nix-profile/etc/profile.d/nix.sh
   }
 }
