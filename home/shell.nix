@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-let
+{pkgs, ...}: let
   shellAliases = {
     # Apps... but better
     git = "hub";
@@ -49,8 +47,7 @@ let
     p = "pnpm";
     y = "yarn";
   };
-in
-{
+in {
   home.packages = with pkgs; [
     fzf
     zoxide
@@ -60,7 +57,7 @@ in
 
   programs.zoxide = {
     enable = true;
-    options = [ "--cmd j" ];
+    options = ["--cmd j"];
     enableBashIntegration = true;
     enableFishIntegration = true;
     enableZshIntegration = true;
@@ -127,7 +124,7 @@ in
       set -gx PATH "$PNPM_HOME" $PATH
 
       starship init fish | source
-      
+
       nvm use default
 
       # Disable fish greeting
@@ -208,31 +205,34 @@ in
           echo "Usage: fb <ticket-number>"
           return 1
         end
-        
+
         # Switch to main, fetch, and pull
         git checkout main
         git fetch --prune
         git pull
-        
+
         # Create and checkout new feature branch
         git checkout -b "feature/SWE-$argv[1]"
       '';
 
       sync = ''
         # Store current branch name
+        git add .
+        git stash
         set current_branch (git rev-parse --abbrev-ref HEAD)
-        
+
         # Fetch and prune
         git fetch --prune
-        
+
         # Checkout main and pull
         git checkout main
         git pull
-        
+
         # Return to feature branch and merge
         git checkout $current_branch
         git merge main
-        
+        git stash pop
+
         echo "Synced main into $current_branch"
       '';
     };
@@ -241,7 +241,7 @@ in
   programs.zsh = {
     inherit shellAliases;
     enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     enableCompletion = true;
     history.extended = true;
   };

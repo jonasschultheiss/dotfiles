@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   homebrew = {
     enable = true;
     onActivation = {
@@ -9,6 +7,9 @@
       upgrade = true;
     };
     brews = [
+      "texlive"
+      "mtr"
+      "latexindent"
       "angular-cli"
       "asciidoctor"
       "bat"
@@ -61,6 +62,7 @@
       "yarn"
     ];
     casks = [
+      "proton-mail"
       "1password-cli"
       "appcleaner"
       "brave-browser"
@@ -98,8 +100,8 @@
       "linear-linear"
       "visual-studio-code"
       "zed"
-      # "font-geist-mono"
-      # "font-geist"
+      "font-geist-mono"
+      "font-geist"
     ];
     taps = [
       "homebrew/cask-fonts"

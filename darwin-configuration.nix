@@ -1,26 +1,27 @@
-{ pkgs, ... }:
-
-let mainUser = "jonasschultheiss";
+{pkgs, ...}: let
+  mainUser = "jonasschultheiss";
 in {
-  imports = [ ./darwin <home-manager/nix-darwin> ];
+  imports = [./darwin <home-manager/nix-darwin>];
 
   users.users.${mainUser} = {
     home = "/Users/${mainUser}";
     shell = pkgs.fish;
   };
-  
+
   # Add fish to system shells
-  environment.shells = with pkgs; [ fish ];
+  environment.shells = with pkgs; [fish];
   programs.fish.enable = true;
-  
-  # Enable fish as login shell
-  environment.loginShell = pkgs.fish;
 
   home-manager = {
     users.${mainUser} = import ./home;
     useGlobalPkgs = true;
     useUserPackages = false;
   };
+
+  # Add system packages
+  environment.systemPackages = with pkgs; [
+    alejandra
+  ];
 
   services.nix-daemon.enable = true;
   nix.useDaemon = true;
