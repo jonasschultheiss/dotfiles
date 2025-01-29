@@ -3,6 +3,7 @@
     ./macos.nix
     ./homebrew.nix
     ./documentation.nix
+    ./pam.nix
   ];
 
   networking = {
