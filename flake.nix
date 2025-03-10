@@ -53,8 +53,12 @@
               userEmail = "jonas.schultheiss@example.com";
             };
 
-            # Import lunaka-config module
-            imports = [./modules/shared/lunaka-config];
+            # Import shared modules
+            imports = [
+              ./modules/shared/lunaka-config
+              ./modules/shared/utilities
+              ./modules/home/jonasschultheiss/utilities.nix
+            ];
           }
         ];
       };
@@ -90,8 +94,12 @@
               userEmail = "vera.stalder@example.com";
             };
 
-            # Import lunaka-config module
-            imports = [./modules/shared/lunaka-config];
+            # Import shared modules
+            imports = [
+              ./modules/shared/lunaka-config
+              ./modules/shared/utilities
+              ./modules/home/verastalder/utilities.nix
+            ];
           }
         ];
       };
