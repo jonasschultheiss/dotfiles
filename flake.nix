@@ -56,9 +56,19 @@
 
           # Configure jonasschultheiss user
           home-manager.users.jonasschultheiss = {pkgs, ...}: {
-            home.username = "jonasschultheiss";
-            home.homeDirectory = "/Users/jonasschultheiss";
-            home.stateVersion = "22.05";
+            home = {
+              username = "jonasschultheiss";
+              homeDirectory = "/Users/jonasschultheiss";
+              stateVersion = "22.05";
+
+              # Basic packages
+              packages = with pkgs; [
+                fd
+                eza
+                bat
+                ripgrep
+              ];
+            };
 
             # Enable home-manager
             programs.home-manager.enable = true;
@@ -72,14 +82,6 @@
               userName = "Jonas Schultheiss";
               userEmail = "jonas.schultheiss@example.com";
             };
-
-            # Basic packages
-            home.packages = with pkgs; [
-              fd
-              eza
-              bat
-              ripgrep
-            ];
           };
         }
       ];
