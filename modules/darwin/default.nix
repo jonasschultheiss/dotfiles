@@ -1,37 +1,41 @@
+# Main darwin configuration module
 {
+  config,
   pkgs,
   lib,
   ...
 }: {
-  imports = [
-    ./system.nix
-    ./homebrew.nix
-    ./macos.nix
-  ];
-
-  # These are the core settings that should be in the default darwin module
-  nix = {
-    settings = {
-      experimental-features = "nix-command flakes";
-    };
-
-    # Enable automatic store optimization
-    optimise.automatic = true;
-
-    # Add ability to install packages for both Intel and ARM macs if needed
-    extraOptions =
-      lib.optionalString (pkgs.system == "aarch64-darwin") ''
-        extra-platforms = aarch64-darwin x86_64-darwin
-      ''
-      + lib.optionalString (pkgs.system == "x86_64-darwin") ''
-        extra-platforms = x86_64-darwin aarch64-darwin
-      '';
+  # Enable nix command and flakes with dirty warning disabled
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    warn-dirty = false; # Disable the "Git tree is dirty" warning
   };
 
-  # Fix for Nix build user group ID mismatch
-  # This is needed when the nixbld group has GID 350 instead of the expected 30000
-  ids.gids.nixbld = 350;
+  # Enable auto-optimise-store
+  nix.optimise.automatic = true;
 
-  # Used for backwards compatibility, please read the changelog before changing.
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  # Enable fish shell
+  programs.fish.enable = true;
+  environment.shells = with pkgs; [fish];
+
+  # Set hostname and system version
+  networking.hostName = "jonasschultheiss-mac";
   system.stateVersion = 4;
+
+  # Add basic system packages
+  environment.systemPackages = with pkgs; [
+    alejandra # Nix formatter
+    git
+  ];
+
+  # Configure screenshot location for jonasschultheiss
+  system.defaults.screencapture.location = "/Users/jonasschultheiss/Pictures/Screenshots";
+
+  # Import additional system settings
+  imports = [
+    ./system.nix
+  ];
 }

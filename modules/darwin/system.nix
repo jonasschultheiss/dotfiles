@@ -1,27 +1,67 @@
-{pkgs, ...}: {
-  # Define users with Fish as the default shell
-  users.users = {
-    jonasschultheiss = {
-      name = "jonasschultheiss";
-      home = "/Users/jonasschultheiss";
-      shell = pkgs.fish;
-    };
-    verastalder = {
-      name = "verastalder";
-      home = "/Users/verastalder";
-      shell = pkgs.fish;
-    };
+# Additional system settings for darwin
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  # System-wide settings for nix
+  nix = {
+    # Add ability to install packages for both Intel and ARM macs if needed
+    extraOptions =
+      lib.optionalString (pkgs.system == "aarch64-darwin") ''
+        extra-platforms = aarch64-darwin x86_64-darwin
+      ''
+      + lib.optionalString (pkgs.system == "x86_64-darwin") ''
+        extra-platforms = x86_64-darwin aarch64-darwin
+      '';
   };
 
-  # Enable Fish shell system-wide
-  environment.shells = with pkgs; [fish];
-  programs.fish.enable = true;
+  # Fix for Nix build user group ID mismatch
+  # This is needed when the nixbld group has GID 350 instead of the expected 30000
+  ids.gids.nixbld = 350;
 
-  # Add system packages
-  environment.systemPackages = with pkgs; [
-    alejandra
-  ];
+  # System defaults for macOS
+  system.defaults = {
+    # Dock settings
+    dock = {
+      autohide = true;
+      orientation = "left";
+      showhidden = true;
+      show-recents = false;
+      static-only = true;
+      tilesize = 32;
+      launchanim = false;
+      mru-spaces = false;
+    };
 
-  # Set the default configuration path
-  environment.darwinConfig = "$HOME/.config/nixpkgs/flake.nix";
+    # Finder settings
+    finder = {
+      AppleShowAllFiles = true;
+      ShowPathbar = true;
+      AppleShowAllExtensions = true;
+      FXEnableExtensionChangeWarning = false;
+      CreateDesktop = false;
+    };
+
+    # Security and login settings
+    loginwindow = {
+      GuestEnabled = false;
+      DisableConsoleAccess = true;
+    };
+
+    # Global domain settings
+    NSGlobalDomain = {
+      AppleInterfaceStyle = "Dark";
+      AppleKeyboardUIMode = 3;
+      AppleShowAllExtensions = true;
+      NSAutomaticCapitalizationEnabled = false;
+      NSAutomaticDashSubstitutionEnabled = false;
+      NSAutomaticPeriodSubstitutionEnabled = false;
+      NSAutomaticQuoteSubstitutionEnabled = false;
+      NSAutomaticSpellingCorrectionEnabled = false;
+      NSNavPanelExpandedStateForSaveMode = true;
+      NSNavPanelExpandedStateForSaveMode2 = true;
+    };
+  };
 }
