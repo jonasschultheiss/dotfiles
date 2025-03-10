@@ -5,7 +5,7 @@
 }: {
   # Import the common git configuration
   imports = [
-    ../../../common/git
+    ../../../common/git/default.nix
   ];
 
   # User-specific git configuration

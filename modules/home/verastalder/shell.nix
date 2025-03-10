@@ -24,7 +24,7 @@
 in {
   # Import common shell configuration
   imports = [
-    ../../../common/shell
+    ../../../common/shell/default.nix
   ];
 
   # Additional Verastalder-specific shell customizations

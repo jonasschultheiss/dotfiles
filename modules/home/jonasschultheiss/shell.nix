@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   # Import common shell configuration
   imports = [
-    ../../../common/shell
+    ../../../common/shell/default.nix
   ];
 
   # Additional jonasschultheiss-specific shell customizations
