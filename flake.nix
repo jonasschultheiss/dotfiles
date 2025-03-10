@@ -47,13 +47,24 @@
             # Enable fish
             programs.fish.enable = true;
 
-            # Enable starship and configure it properly
+            # Enable starship with original configuration
             programs.starship = {
               enable = true;
               enableFishIntegration = true;
               settings = {
-                add_newline = true;
-                format = "$all";
+                format = "$username$hostname$directory$git_branch$git_status$cmd_duration$line_break$character";
+
+                # Common symbol settings
+                character = {
+                  success_symbol = "[➜](bold green)";
+                  error_symbol = "[✗](bold red)";
+                };
+
+                # Directory settings
+                directory = {
+                  truncation_length = 5;
+                  truncation_symbol = "…/";
+                };
               };
             };
 
@@ -100,13 +111,42 @@
             # Enable fish
             programs.fish.enable = true;
 
-            # Enable starship and configure it properly
+            # Enable starship with original configuration
             programs.starship = {
               enable = true;
               enableFishIntegration = true;
               settings = {
-                add_newline = true;
-                format = "$all";
+                format = "$battery$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$python$character";
+
+                directory.read_only = " ";
+                battery = {
+                  full_symbol = "•";
+                  charging_symbol = "⇡";
+                  discharging_symbol = "⇣";
+                };
+                git_branch = {
+                  format = "[$branch]($style)";
+                  style = "bright-black";
+                };
+                git_status = {
+                  format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](bright-black)( $ahead_behind$stashed)]($style) ";
+                  style = "cyan";
+                  conflicted = "​";
+                  untracked = "​";
+                  modified = "​";
+                  staged = "​";
+                  renamed = "​";
+                  deleted = "​";
+                  stashed = "≡";
+                };
+                git_state = {
+                  format = "\([$state( $progress_current/$progress_total)]($style)\) ";
+                  style = "bright-black";
+                };
+                cmd_duration = {
+                  format = "[$duration]($style) ";
+                  style = "yellow";
+                };
               };
             };
 
@@ -135,8 +175,11 @@
       modules = [
         # Basic darwin configuration
         {
-          # Enable nix command and flakes
-          nix.settings.experimental-features = ["nix-command" "flakes"];
+          # Enable nix command and flakes with dirty warning disabled
+          nix.settings = {
+            experimental-features = ["nix-command" "flakes"];
+            warn-dirty = false; # Disable the "Git tree is dirty" warning
+          };
 
           # Enable auto-optimise-store
           nix.optimise.automatic = true;
