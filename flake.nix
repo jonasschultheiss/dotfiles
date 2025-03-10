@@ -52,6 +52,9 @@
               userName = "Jonas Schultheiss";
               userEmail = "jonas.schultheiss@example.com";
             };
+
+            # Import lunaka-config module
+            imports = [./modules/shared/lunaka-config];
           }
         ];
       };
@@ -86,6 +89,9 @@
               userName = "Vera Stalder";
               userEmail = "vera.stalder@example.com";
             };
+
+            # Import lunaka-config module
+            imports = [./modules/shared/lunaka-config];
           }
         ];
       };

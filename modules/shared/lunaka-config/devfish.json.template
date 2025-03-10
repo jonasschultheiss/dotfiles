@@ -1,0 +1,15 @@
+{
+  "user": "USERNAME_PLACEHOLDER",
+  "projects": [
+    {
+      "name": "lunaka-config",
+      "path": "/Users/USERNAME_PLACEHOLDER/lunaka-config",
+      "description": "Configuration files for Lunaka development environment"
+    }
+  ],
+  "settings": {
+    "editor": "code",
+    "terminal": "iterm2",
+    "theme": "dark"
+  }
+} 
