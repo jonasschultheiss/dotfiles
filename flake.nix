@@ -233,8 +233,11 @@
           echo "Building and activating home-manager configuration for $CURRENT_USER..."
 
           # Check if we have a configuration for the current user
-          if [ -e ".#homeConfigurations.$CURRENT_USER" ]; then
-            home-manager switch --flake .#$CURRENT_USER
+          if nix flake show | grep -q "homeConfigurations.$CURRENT_USER"; then
+            # Build and activate the home-manager configuration
+            echo "Using home-manager configuration for $CURRENT_USER"
+            nix build .#homeConfigurations.$CURRENT_USER.activationPackage
+            ./result/activate
           else
             echo "No home-manager configuration found for $CURRENT_USER"
           fi
