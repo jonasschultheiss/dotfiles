@@ -37,6 +37,7 @@
                 bat
                 ripgrep
                 git
+                starship
               ];
             };
 
@@ -45,6 +46,16 @@
 
             # Enable fish
             programs.fish.enable = true;
+
+            # Enable starship and configure it properly
+            programs.starship = {
+              enable = true;
+              enableFishIntegration = true;
+              settings = {
+                add_newline = true;
+                format = "$all";
+              };
+            };
 
             # Enable git
             programs.git = {
@@ -56,7 +67,8 @@
             # Import shared modules
             imports = [
               ./modules/shared/lunaka-config
-              ./modules/shared/utilities
+              ./modules/shared/utilities/default.nix
+              ./modules/shared/utilities/fish-fixes.nix
               ./modules/home/jonasschultheiss/utilities.nix
             ];
           }
@@ -78,6 +90,7 @@
                 bat
                 ripgrep
                 git
+                starship
               ];
             };
 
@@ -86,6 +99,16 @@
 
             # Enable fish
             programs.fish.enable = true;
+
+            # Enable starship and configure it properly
+            programs.starship = {
+              enable = true;
+              enableFishIntegration = true;
+              settings = {
+                add_newline = true;
+                format = "$all";
+              };
+            };
 
             # Enable git
             programs.git = {
@@ -97,7 +120,8 @@
             # Import shared modules
             imports = [
               ./modules/shared/lunaka-config
-              ./modules/shared/utilities
+              ./modules/shared/utilities/default.nix
+              ./modules/shared/utilities/fish-fixes.nix
               ./modules/home/verastalder/utilities.nix
             ];
           }
