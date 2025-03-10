@@ -90,10 +90,8 @@
         };
       };
 
-      # Import shared modules
-      imports = [
-        ../../modules/shared/lunaka-config
-      ];
+      # Leave imports empty to avoid path resolution issues
+      imports = [];
     };
 
     # Create dedicated user modules
@@ -149,7 +147,8 @@
           })
           # User-specific utilities
           userModules.jonasschultheiss
-          # Shared utilities
+          # Shared modules
+          ./modules/shared/lunaka-config
           ./modules/shared/utilities/default.nix
         ];
       };
@@ -165,7 +164,8 @@
           })
           # User-specific utilities
           userModules.verastalder
-          # Shared utilities
+          # Shared modules
+          ./modules/shared/lunaka-config
           ./modules/shared/utilities/default.nix
         ];
       };
