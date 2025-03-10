@@ -19,42 +19,59 @@
     darwin,
     home-manager,
     ...
-  }: let
+  } @ inputs: let
+    inherit (darwin.lib) darwinSystem;
+    inherit (home-manager.lib) homeManagerConfiguration;
+
+    # System architecture
     system = "aarch64-darwin";
-    pkgs = nixpkgs.legacyPackages.${system};
+
+    # Configuration for Mac hardware - OS specific modules
+    darwinModules = [
+      ./modules/os/darwin/default.nix
+    ];
+
+    # Function to create specialized arguments for modules
+    mkSpecialArgs = {username ? null}: {
+      inherit inputs self system;
+      flakeDirectory = self.outPath;
+      currentUser = username;
+    };
+
+    # Function to create user configurations with consistent structure
+    mkUserConfig = {
+      username,
+      email,
+    }:
+      homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+        extraSpecialArgs = mkSpecialArgs {inherit username;};
+        modules = [
+          # Each user's configuration is self-contained
+          ./users/${username}/default.nix
+        ];
+      };
   in {
     # Home Manager configurations
     homeConfigurations = {
       # Jonas's configuration
-      jonasschultheiss = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs;
-        modules = [
-          # Import the main user configuration which imports all other modules
-          ./users/jonasschultheiss/default.nix
-          # Import shared utilities
-          ./modules/shared/utilities/default.nix
-        ];
+      jonasschultheiss = mkUserConfig {
+        username = "jonasschultheiss";
+        email = "jonas.schultheiss@example.com";
       };
 
       # Vera's configuration
-      verastalder = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs;
-        modules = [
-          # Import the main user configuration which imports all other modules
-          ./users/verastalder/default.nix
-          # Import shared utilities
-          ./modules/shared/utilities/default.nix
-        ];
+      verastalder = mkUserConfig {
+        username = "verastalder";
+        email = "vera.stalder@example.com";
       };
     };
 
     # Darwin configurations
-    darwinConfigurations.system = darwin.lib.darwinSystem {
+    darwinConfigurations.system = darwinSystem {
       inherit system;
-      modules = [
-        # Import the main darwin configuration module
-        ./modules/darwin/default.nix
-      ];
+      specialArgs = mkSpecialArgs {};
+      modules = darwinModules;
     };
 
     # One-command builds with native commands
@@ -62,17 +79,17 @@
     apps.${system} = {
       build = {
         type = "app";
-        program = toString (pkgs.writeShellScript "build-and-switch" ''
+        program = toString (nixpkgs.legacyPackages.${system}.writeShellScript "build-and-switch" ''
           #!/bin/sh
           set -e
 
           # Build system configuration
           echo "Building system configuration..."
-          nix build .#darwinConfigurations.system.system
+          nix build ${self}#darwinConfigurations.system.system --no-link
 
           # Apply system configuration
           echo "Applying system configuration..."
-          ./result/sw/bin/darwin-rebuild switch --flake .#system
+          ${darwin.packages.${system}.darwin-rebuild}/bin/darwin-rebuild switch --flake ${self}#system
 
           # Determine current user
           CURRENT_USER=$(whoami)
@@ -81,10 +98,9 @@
           echo "Building and activating home-manager configuration for $CURRENT_USER..."
 
           # Try to build the home-manager configuration
-          if nix build .#homeConfigurations.$CURRENT_USER.activationPackage --no-link 2>/dev/null; then
+          if nix build ${self}#homeConfigurations.$CURRENT_USER.activationPackage --no-link 2>/dev/null; then
             echo "Using home-manager configuration for $CURRENT_USER"
-            nix build .#homeConfigurations.$CURRENT_USER.activationPackage
-            ./result/activate
+            ${home-manager.packages.${system}.home-manager}/bin/home-manager switch --flake ${self}#$CURRENT_USER
           else
             echo "No home-manager configuration found for $CURRENT_USER"
           fi

@@ -8,13 +8,9 @@
   # System-wide settings for nix
   nix = {
     # Add ability to install packages for both Intel and ARM macs if needed
-    extraOptions =
-      lib.optionalString (pkgs.system == "aarch64-darwin") ''
-        extra-platforms = aarch64-darwin x86_64-darwin
-      ''
-      + lib.optionalString (pkgs.system == "x86_64-darwin") ''
-        extra-platforms = x86_64-darwin aarch64-darwin
-      '';
+    extraOptions = lib.mkIf (pkgs.system == "aarch64-darwin") ''
+      extra-platforms = aarch64-darwin x86_64-darwin
+    '';
   };
 
   # Fix for Nix build user group ID mismatch

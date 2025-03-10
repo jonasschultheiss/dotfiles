@@ -1,10 +1,17 @@
 # Shell configuration for jonasschultheiss
-{pkgs, ...}: {
-  # Enable fish shell
-  programs.fish = {
-    enable = true;
+{
+  pkgs,
+  lib,
+  ...
+}: {
+  # Import common shell configuration
+  imports = [
+    ../../modules/features/shell/default.nix
+  ];
 
-    # Shell aliases specific to jonasschultheiss
+  # User-specific shell configuration
+  programs.fish = {
+    # Additional shell aliases specific to jonasschultheiss
     shellAliases = {
       # Modern command-line tools
       git = "hub";
@@ -16,28 +23,16 @@
       l = "ls -l";
       ll = "ls -la";
 
-      # Navigation shortcuts
-      ".." = "cd ..";
-      "..." = "cd ../..";
-      "...." = "cd ../../..";
-
       # Common utilities
       tree = "eza --tree";
-      reload = "exec fish";
       oo = "open .";
       pwdc = "pwd | pbcopy";
       flushdns = "sudo killall -HUP mDNSResponder";
       dotfiles = "cursor ~/.config/nixpkgs";
     };
 
-    # Shell init
+    # User-specific shell init (will be combined with the common shellInit)
     shellInit = ''
-      # Initialize homebrew
-      eval (/opt/homebrew/bin/brew shellenv)
-
-      # Disable fish greeting
-      set -g fish_greeting ""
-
       # Add any jonasschultheiss-specific shell init here
     '';
   };

@@ -1,5 +1,10 @@
 # Shell configuration for verastalder
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
   # Verastalder-specific shell abbreviations
   shellAbbrs = {
     gs = "git status -sb";
@@ -20,12 +25,15 @@
     gfm = "git findmessage";
     p = "pnpm";
     y = "yarn";
-    reload-switch = "nix run .#build";
   };
 in {
-  # Enable fish shell
+  # Import common shell configuration
+  imports = [
+    ../../modules/features/shell/default.nix
+  ];
+
+  # User-specific shell configuration
   programs.fish = {
-    enable = true;
     inherit shellAbbrs;
 
     # Additional Verastalder-specific shell aliases
@@ -37,7 +45,7 @@ in {
       dark = "osascript -e 'tell application \"System Events\" to tell appearance preferences to set dark mode to not dark mode'";
     };
 
-    # Additional Verastalder-specific shell init
+    # User-specific shell init (will be combined with the common shellInit)
     shellInit = ''
       # Configure Java
       set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk@17/include"
@@ -48,7 +56,7 @@ in {
       set -gx CHROME_BIN "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
 
       # Configure PNPM
-      set -gx PNPM_HOME "/Users/verastalder/Library/pnpm"
+      set -gx PNPM_HOME "/Users/${config.home.username}/Library/pnpm"
       set -gx PATH "$PNPM_HOME" $PATH
 
       # Initialize starship
@@ -136,7 +144,7 @@ in {
     };
   };
 
-  # Verastalder-specific plugins
+  # Additional Verastalder-specific plugins
   programs.fish.plugins = [
     {
       name = "fish-kubectl-completions";
@@ -154,15 +162,6 @@ in {
         repo = "bass";
         rev = "master";
         sha256 = "0mb01y1d0g8ilsr5m8a71j6xmqlyhf8w4xjf00wkk8k41cz3ypky";
-      };
-    }
-    {
-      name = "nix-env";
-      src = pkgs.fetchFromGitHub {
-        owner = "lilyball";
-        repo = "nix-env.fish";
-        rev = "00c6cc762427efe08ac0bd0d1b1d12048d3ca727";
-        sha256 = "1hrl22dd0aaszdanhvddvqz3aq40jp9zi2zn0v1hjnf7fx4bgpma";
       };
     }
   ];

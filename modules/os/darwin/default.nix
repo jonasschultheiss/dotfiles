@@ -22,7 +22,8 @@
   environment.shells = with pkgs; [fish];
 
   # Set hostname and system version
-  networking.hostName = "jonasschultheiss-mac";
+  # This can be overridden by the user's configuration
+  networking.hostName = lib.mkDefault "darwin-machine";
   system.stateVersion = 4;
 
   # Add basic system packages
@@ -31,8 +32,9 @@
     git
   ];
 
-  # Configure screenshot location for jonasschultheiss
-  system.defaults.screencapture.location = "/Users/jonasschultheiss/Pictures/Screenshots";
+  # Set default screencapture location
+  # This is a sensible default that can be overridden
+  system.defaults.screencapture.location = lib.mkDefault "~/Pictures/Screenshots";
 
   # Import additional system settings
   imports = [
