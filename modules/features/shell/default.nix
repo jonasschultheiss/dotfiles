@@ -68,9 +68,6 @@ in {
     nixpkgs-fmt
     jq
     htop
-
-    # Make sure starship is available for all users
-    starship
   ];
 
   programs.zoxide = {
@@ -81,8 +78,6 @@ in {
     enableZshIntegration = true;
   };
 
-  # Starship is configured in the dedicated starship module
-
   programs.fish = {
     inherit shellAliases shellAbbrs;
     enable = true;
@@ -90,23 +85,12 @@ in {
     shellInit = ''
       # Initialize homebrew
       eval (/opt/homebrew/bin/brew shellenv)
-
-      # Configure Java
-      # TODO: Add a version manager for openjdk versions
-      # fish_add_path /opt/homebrew/opt/openjdk@17/bin
-      set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk@17/include"
-      set -gx JAVA_HOME /opt/homebrew/opt/openjdk@17
-      set -gx PATH $JAVA_HOME/bin $PATH
-
-
       set -gx CHROME_BIN "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
 
 
       # Configure PNPM - using dynamic user path
       set -gx PNPM_HOME "/Users/${config.home.username}/Library/pnpm"
       set -gx PATH "$PNPM_HOME" $PATH
-
-      starship init fish | source
 
       # Check if NVM has a default version, if not install LTS
       if test -e ~/.nvm/alias/default
@@ -149,31 +133,8 @@ in {
         src = ./iterm2_shell_integration;
       }
       {
-        name = "fish-kubectl-completions";
-        src = pkgs.fetchFromGitHub {
-          owner = "evanlucas";
-          repo = "fish-kubectl-completions";
-          rev = "ced676392575d618d8b80b3895cdc3159be3f628";
-          sha256 = "sha256-OYiYTW+g71vD9NWOcX1i2/TaQfAg+c2dJZ5ohwWSDCc";
-        };
-      }
-      {
         name = "bass";
-        src = pkgs.fetchFromGitHub {
-          owner = "edc";
-          repo = "bass";
-          rev = "master";
-          sha256 = "0mb01y1d0g8ilsr5m8a71j6xmqlyhf8w4xjf00wkk8k41cz3ypky";
-        };
-      }
-      {
-        name = "nix-env";
-        src = pkgs.fetchFromGitHub {
-          owner = "lilyball";
-          repo = "nix-env.fish";
-          rev = "00c6cc762427efe08ac0bd0d1b1d12048d3ca727";
-          sha256 = "1hrl22dd0aaszdanhvddvqz3aq40jp9zi2zn0v1hjnf7fx4bgpma";
-        };
+        src = pkgs.fishPlugins.bass.src;
       }
     ];
     interactiveShellInit = ''

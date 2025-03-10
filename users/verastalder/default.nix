@@ -9,11 +9,6 @@
 }: {
   # Import all configurations for this user
   imports = [
-    # User-specific configs
-    ./home.nix # Basic home-manager settings
-    ./starship.nix # Starship prompt configuration
-    ./packages.nix # User packages
-
     # Feature modules
     ../../modules/features/git
     ../../modules/features/shell

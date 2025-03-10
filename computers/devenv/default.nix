@@ -22,54 +22,21 @@
 
     # GUI applications to install through Homebrew Cask
     casks = [
-      "visual-studio-code"
-      "docker"
-      "iterm2"
-      "1password"
-      "brave-browser"
-      "arc"
-      "rectangle"
-      "slack"
     ];
 
     # CLI tools to install through Homebrew
     brews = [
-      "nvm"
-      "openjdk@17"
-      "awscli"
-      "hub"
+      "openjdk"
     ];
 
     # Mac App Store applications to install
     masApps = {
-      "Xcode" = 497799835;
-      "Amphetamine" = 937984704;
     };
   };
 
   # Computer-specific packages to install
-  home.packages = with pkgs; [
-    # Development tools
-    nodejs_20
-    terraform
-    ansible
-    docker
-    docker-compose
-
-    # Utilities
-    htop
-    jq
-    ripgrep
-    wget
-    curl
-
-    # Languages and tools
-    rustup
-    go
-  ];
+  home.packages = with pkgs; [];
 
   # Specific environment variables for this machine
-  home.sessionVariables = {
-    DEVENV_MACHINE = "true";
-  };
+  home.sessionVariables = {};
 }

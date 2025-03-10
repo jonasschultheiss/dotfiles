@@ -1,12 +1,16 @@
 # Starship prompt configuration
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
+  # Install starship package
+  home.packages = with pkgs; [
+    starship
+  ];
+
   programs.starship = {
     enable = true;
+    # Enable integrations for all shells
+    enableBashIntegration = true;
+    enableFishIntegration = true;
+    enableZshIntegration = true;
     settings = {
       format = "$battery$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$python$character";
 
