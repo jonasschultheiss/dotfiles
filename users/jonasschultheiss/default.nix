@@ -10,11 +10,6 @@
   # Import all configurations for this user
   imports = [
     # User-specific configs
-    ./home.nix # Basic home-manager settings
-    ./git.nix # Git configuration
-    ./starship.nix # Starship prompt configuration
-    ./packages.nix # User packages
-    ./shell.nix # Shell configuration
 
     # Feature modules
     ../../modules/features/git

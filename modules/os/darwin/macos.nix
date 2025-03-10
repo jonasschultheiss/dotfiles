@@ -1,4 +1,13 @@
-{...}: {
+{
+  config,
+  lib,
+  pkgs,
+  currentUser,
+  currentComputer,
+  ...
+}: {
+  # Assertions are now handled by the config-validation module
+
   system.defaults = {
     LaunchServices = {
       LSQuarantine = false;
@@ -65,17 +74,31 @@
       DisableConsoleAccess = true;
     };
 
-    # User-specific screencapture location settings
-    # Note: Each user has their own screenshot directory
+    # Dynamic screenshot location based on user
     screencapture = {
-      location = "/Users/jonasschultheiss/screenshots";
-      # To set user-specific locations, you would need a more sophisticated
-      # approach with conditionals in the actual system configuration
+      location = "/Users/${currentUser.username}/screenshots";
     };
 
+    # Dynamic SMB settings based on computer
     smb = {
-      NetBIOSName = "devenv";
-      ServerDescription = "devenv";
+      NetBIOSName = currentComputer.hostName;
+      ServerDescription = currentComputer.hostName;
     };
+  };
+
+  # Create the screenshots directory if it doesn't exist
+  system.activationScripts.screenshotDir = {
+    enable = true;
+    text = ''
+      # Create screenshots directory for the current user
+      USERNAME="${currentUser.username}"
+      SCREENSHOT_DIR="/Users/$USERNAME/screenshots"
+
+      if [ ! -d "$SCREENSHOT_DIR" ]; then
+        echo "Creating screenshots directory at $SCREENSHOT_DIR"
+        mkdir -p "$SCREENSHOT_DIR"
+        chown "$USERNAME:staff" "$SCREENSHOT_DIR"
+      fi
+    '';
   };
 }
