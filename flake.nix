@@ -79,7 +79,6 @@
             imports = [
               ./modules/shared/lunaka-config
               ./modules/shared/utilities/default.nix
-              ./modules/shared/utilities/fish-fixes.nix
               ./modules/home/jonasschultheiss/utilities.nix
             ];
           }
@@ -161,7 +160,6 @@
             imports = [
               ./modules/shared/lunaka-config
               ./modules/shared/utilities/default.nix
-              ./modules/shared/utilities/fish-fixes.nix
               ./modules/home/verastalder/utilities.nix
             ];
           }
