@@ -232,9 +232,8 @@
           # Build and activate home-manager configuration
           echo "Building and activating home-manager configuration for $CURRENT_USER..."
 
-          # Check if we have a configuration for the current user
-          if nix flake show | grep -q "homeConfigurations.$CURRENT_USER"; then
-            # Build and activate the home-manager configuration
+          # Try to build the home-manager configuration
+          if nix build .#homeConfigurations.$CURRENT_USER.activationPackage --no-link 2>/dev/null; then
             echo "Using home-manager configuration for $CURRENT_USER"
             nix build .#homeConfigurations.$CURRENT_USER.activationPackage
             ./result/activate
