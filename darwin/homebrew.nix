@@ -111,7 +111,6 @@
       "Microsoft PowerPoint" = 462062816;
       "Microsoft Word" = 462054704;
       "Xcode" = 497799835;
-      "Cisco Secure Client" = 1135064690;
     };
   };
 }

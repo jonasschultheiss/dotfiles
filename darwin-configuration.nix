@@ -23,8 +23,8 @@ in {
     alejandra
   ];
 
-  services.nix-daemon.enable = true;
-  nix.useDaemon = true;
+  # The nix-daemon is now managed automatically by nix.enable
+  nix.enable = true;
 
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin-configuration.nix
   environment.darwinConfig = "$HOME/.config/nixpkgs/darwin-configuration.nix";

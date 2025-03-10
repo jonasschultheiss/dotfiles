@@ -46,17 +46,49 @@
       gpg.ssh.allowedSignersFile = builtins.toPath ./allowed-signers;
 
       commit.template = builtins.toPath ./git-message;
+      commit.verbose = true;
 
-      # If no upstream branch is specified, push to the branch with the same
-      # name as the current branch
-      push.default = "current";
+      push.default = "simple";
+      push.autoSetupRemote = true;
+      push.followTags = true;
 
       core = {
         editor = "cursor --wait";
         pager = "diff-so-fancy | less --tabs=4 -RFX";
+        excludesfile = "~/.gitignore";
       };
 
+      column.ui = "auto";
+      branch.sort = "-committerdate";
+      tag.sort = "version:refname";
       init.defaultBranch = "main";
+
+      diff = {
+        algorithm = "histogram";
+        colorMoved = "plain";
+        mnemonicPrefix = true;
+        renames = true;
+      };
+
+      fetch = {
+        prune = true;
+        pruneTags = true;
+        all = true;
+      };
+
+      help.autocorrect = "prompt";
+
+      rerere = {
+        enabled = true;
+        autoupdate = true;
+      };
+
+      rebase = {
+        autoSquash = true;
+        autoStash = true;
+        updateRefs = true;
+      };
+
       pull.rebase = true;
       color.ui = true;
 
