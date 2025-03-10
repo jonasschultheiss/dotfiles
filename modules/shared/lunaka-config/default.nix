@@ -7,20 +7,20 @@
   # Get the current username
   username = config.home.username;
 in {
-  # Create the directory in the users's home
-  home.file."lunaka-config" = {
-    source = ./.; # Copy the entire lunaka-config directory
-    recursive = true;
-    onChange = ''
-      # Process the devfish.json template and replace the placeholder with the current username
-      if [ -f ~/.config/home-manager/lunaka-config/devfish.json.template ]; then
-        cat ~/.config/home-manager/lunaka-config/devfish.json.template | sed "s/USERNAME_PLACEHOLDER/${username}/g" > ~/.config/home-manager/lunaka-config/devfish.json
-      fi
+  # Create the lunaka-config directory with the correct configuration files
+  home.file = {
+    # The devfish.json template
+    ".config/lunaka-config/devfish.json".text =
+      builtins.replaceStrings
+      ["USERNAME_PLACEHOLDER"]
+      [username]
+      (builtins.readFile ./devfish.json.template);
 
-      # Create symbolic links
-      ln -sf ~/.config/home-manager/lunaka-config ~/lunaka-config
-      ln -sf ~/.config/home-manager/lunaka-config ~/Desktop/lunaka-config
-    '';
+    # Copy the iTerm2 shell integration files
+    ".config/lunaka-config/iterm2_shell_integration" = {
+      source = ./iterm2_shell_integration;
+      recursive = true;
+    };
   };
 
   # Add fish integration for iTerm2
@@ -33,13 +33,16 @@ in {
 
   # Create an activation script to ensure links are created/updated at activation time
   home.activation.createLunakaConfigLinks = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    # Process the devfish.json template and replace the placeholder with the current username
-    if [ -f ~/.config/home-manager/lunaka-config/devfish.json.template ]; then
-      $DRY_RUN_CMD cat ~/.config/home-manager/lunaka-config/devfish.json.template | $DRY_RUN_CMD sed "s/USERNAME_PLACEHOLDER/${username}/g" > $VERBOSE_ARG ~/.config/home-manager/lunaka-config/devfish.json
-    fi
+    # Ensure target directories exist
+    $DRY_RUN_CMD mkdir -p $VERBOSE_ARG ~/.config/lunaka-config
 
-    # Create symbolic links
-    $DRY_RUN_CMD ln -sf ~/.config/home-manager/lunaka-config ~/lunaka-config
-    $DRY_RUN_CMD ln -sf ~/.config/home-manager/lunaka-config ~/Desktop/lunaka-config
+    # Create symbolic links (with -f to force overwrite if they exist)
+    echo "Creating symbolic links for lunaka-config"
+    $DRY_RUN_CMD rm -rf $VERBOSE_ARG ~/lunaka-config || true
+    $DRY_RUN_CMD rm -rf $VERBOSE_ARG ~/Desktop/lunaka-config || true
+    $DRY_RUN_CMD ln -sfn $VERBOSE_ARG ~/.config/lunaka-config ~/lunaka-config
+    $DRY_RUN_CMD ln -sfn $VERBOSE_ARG ~/.config/lunaka-config ~/Desktop/lunaka-config
+
+    echo "lunaka-config setup complete"
   '';
 }
