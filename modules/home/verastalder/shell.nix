@@ -174,12 +174,8 @@ in {
     };
   };
 
-  # Verastalder-specific plugins
+  # Verastalder-specific plugins - removed iTerm2 shell integration as it's now in shared module
   programs.fish.plugins = [
-    {
-      name = "iterm2-shell-integration";
-      src = ../iterm2_shell_integration;
-    }
     {
       name = "fish-kubectl-completions";
       src = pkgs.fetchFromGitHub {
