@@ -1,33 +1,81 @@
-# Dotfiles
+# Multi-User Nix-Darwin Configuration with Flakes
 
-My fully-declarative system configuration using Nix and Nix-Darwin.
+This repository contains a multi-user nix-darwin configuration using the Nix Flakes approach. It's designed to manage configurations for multiple users on the same macOS system.
+
+## Features
+
+* Declarative macOS system configuration with nix-darwin
+* User-level configuration with Home Manager
+* Homebrew integration for managing macOS applications
+* Fish shell configuration with plugins and themes
+* Git configuration and defaults
+* macOS system preferences and defaults
+* Multi-user support
+
+## Structure
+
+```
+.
+├── flake.nix              # Flake definition (inputs, outputs)
+├── modules/               # Configuration modules
+│   ├── darwin/            # macOS system configuration
+│   │   ├── default.nix    # Main darwin configuration
+│   │   ├── homebrew.nix   # Homebrew packages and casks
+│   │   ├── macos.nix      # macOS defaults
+│   │   └── system.nix     # System-level configuration
+│   └── home/              # User home configurations
+│       ├── jonasschultheiss/  # Jonas's configuration
+│       │   ├── default.nix    # Main home-manager config
+│       │   └── ...            # Other user-specific configs
+│       └── verastalder/       # Vera's configuration
+│           ├── default.nix    # Main home-manager config
+│           ├── git/           # Git configuration
+│           └── shell.nix      # Shell configuration
+└── home/                  # Legacy home configuration (for reference)
+```
 
 ## Installation
 
-Run at your own risk:
+### Prerequisites
 
-```sh
-curl -fsSL https://raw.githubusercontent.com/jonasschultheiss/dotfiles/main/install | bash
+1. Install Nix:  
+```bash
+sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
 ```
 
-## Goals
+2. Enable flakes:  
+```bash
+mkdir -p ~/.config/nix
+echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+```
 
-- [x] Installs Command Line Tools silently
-- [x] Installs Nix
-- [x] Installs Nix-Darwin
-- [x] Installs Homebrew
-- [x] Clones this repo to the local machine
-- [x] Initiates the first `darwin-rebuild` to switch configurations
+### Building and Activating
 
-## Layout
+To build and activate the configuration:
 
-- `darwin/` - Darwin-specific configuration
-- `home/` - Home-manager configuration and dotfile management
+```bash
+cd ~/.config/nixpkgs
+# Commit any local changes first to keep the repository clean
+git add .
+git commit -m "Update configuration"
+# Then build the configuration
+darwin-rebuild switch --flake .#system
+```
 
-## Inspiration
+## Updating
 
-Heavily inspired by:
+To update your system after making changes to the configuration:
 
-- https://github.com/matchai/dotfiles
-- https://github.com/okkdev/dotnix
-- https://github.com/TheOptimist/systemosaurus
+```bash
+# Always commit your changes first
+git add .
+git commit -m "Update configuration"
+# Then rebuild
+darwin-rebuild switch --flake .#system
+```
+
+## Credits
+
+This configuration is based on:
+* [Verastalder's dotfiles](https://github.com/verastalder/dotfiles)
+* Original nix-darwin configuration by Jonas Schultheiss

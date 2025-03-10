@@ -65,9 +65,8 @@
       DisableConsoleAccess = true;
     };
 
-    screencapture = {
-      location = "/Users/jonasschultheiss/screenshots";
-    };
+    # Note: We're not setting screencapture location here as it's user-specific
+    # and should be set in the user's home-manager configuration
 
     smb = {
       NetBIOSName = "devenv";

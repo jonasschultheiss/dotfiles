@@ -1,23 +1,26 @@
 {pkgs, ...}: {
   imports = [
+    # Import git configuration
     ./git
+    # Import shell configuration
     ./shell.nix
   ];
 
-  # home.sessionVariables = {
-  #   ANDROID_SDK_ROOT = "$HOME/Library/Android/sdk";
-  # };
+  # Set user-specific variables
+  home.username = "jonasschultheiss";
+  home.homeDirectory = "/Users/jonasschultheiss";
 
-  # home.sessionPath = [
-  #   "/usr/local/texlive/2022"
-  #   "$ANDROID_SDK_ROOT/emulator"
-  #   "$ANDROID_SDK_ROOT/platform-tools"
-  # ];
-
+  # User-specific packages
   home.packages = with pkgs; [
     home-manager # system package manager
     comma # any cli you may need
   ];
+
+  # User-specific settings for screencapture
+  system.defaults.screencapture.location = "/Users/jonasschultheiss/screenshots";
+
+  # Let Home Manager install and manage itself
+  programs.home-manager.enable = true;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
