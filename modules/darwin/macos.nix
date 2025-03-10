@@ -65,8 +65,13 @@
       DisableConsoleAccess = true;
     };
 
-    # Note: We're not setting screencapture location here as it's user-specific
-    # and should be set in the user's home-manager configuration
+    # User-specific screencapture location settings
+    # Note: Each user has their own screenshot directory
+    screencapture = {
+      location = "/Users/jonasschultheiss/screenshots";
+      # To set user-specific locations, you would need a more sophisticated
+      # approach with conditionals in the actual system configuration
+    };
 
     smb = {
       NetBIOSName = "devenv";

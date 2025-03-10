@@ -16,8 +16,7 @@
     comma # any cli you may need
   ];
 
-  # User-specific settings for screencapture
-  system.defaults.screencapture.location = "/Users/verastalder/screenshots";
+  # Note: User-specific settings for screencapture moved to darwin/macos.nix
 
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
