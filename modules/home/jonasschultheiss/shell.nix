@@ -1,33 +1,78 @@
 {pkgs, ...}: {
-  # Import common shell configuration
-  imports = [
-    ../../../common/shell/default.nix
-  ];
+  # Temporarily removed common shell configuration import
 
-  # Additional jonasschultheiss-specific shell customizations
+  # Basic shell configuration
   programs.fish = {
-    # Additional shell aliases specific to jonasschultheiss
+    enable = true;
+
+    # Shell aliases specific to jonasschultheiss
     shellAliases = {
-      # Add any jonasschultheiss-specific aliases here
+      # Modern command-line tools
+      git = "hub";
+      ls = "eza";
+      cat = "bat";
+      find = "fd";
+
+      # ls shortcuts
+      l = "ls -l";
+      ll = "ls -la";
+
+      # Navigation shortcuts
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      "...." = "cd ../../..";
+
+      # Common utilities
+      tree = "eza --tree";
+      reload = "exec fish";
+      oo = "open .";
+      pwdc = "pwd | pbcopy";
+      flushdns = "sudo killall -HUP mDNSResponder";
+      dotfiles = "cursor ~/.config/nixpkgs";
     };
 
-    # Additional jonasschultheiss-specific shell init
+    # Shell init
     shellInit = ''
-      # Add any jonasschultheiss-specific shell init here
+      # Initialize homebrew
+      eval (/opt/homebrew/bin/brew shellenv)
 
-      # Configure any specific paths or environment variables
-      # Example:
-      # set -gx PATH "$HOME/bin" $PATH
+      # Disable fish greeting
+      set -g fish_greeting ""
+
+      # Add any jonasschultheiss-specific shell init here
     '';
   };
 
-  # Customize starship prompt if needed
-  programs.starship.settings = {
-    # Add jonasschultheiss-specific starship customizations here
+  # Basic starship prompt
+  programs.starship = {
+    enable = true;
+    settings = {
+      format = "$username$hostname$directory$git_branch$git_status$cmd_duration$line_break$character";
+
+      # Common symbol settings
+      character = {
+        success_symbol = "[➜](bold green)";
+        error_symbol = "[✗](bold red)";
+      };
+
+      # Directory settings
+      directory = {
+        truncation_length = 5;
+        truncation_symbol = "…/";
+      };
+    };
   };
 
-  # Add jonasschultheiss-specific packages
+  # Common packages for shell functionality
   home.packages = with pkgs; [
-    # Add any jonasschultheiss-specific packages here
+    fzf # Fuzzy finder
+    zoxide # Smarter cd command
+    fd # Modern find replacement
+    bat # Modern cat replacement
+    eza # Modern ls replacement
+    ripgrep # Modern grep replacement
+    jq # JSON processor
+    htop # Better top
+    tmux # Terminal multiplexer
   ];
 }
