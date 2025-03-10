@@ -19,6 +19,7 @@
     # Feature modules
     ../../modules/features/git
     ../../modules/features/shell
+    ../../modules/features/starship
   ];
 
   # Set basic user information - use variables from specialArgs

@@ -4,16 +4,12 @@
   lib,
   ...
 }: {
-  # Import common git configuration
-  imports = [
-    ../../modules/features/git/default.nix
-  ];
-
   # User-specific git settings
   programs.git = {
     userName = "Vera Stalder";
     userEmail = "vera.stalder@example.com";
 
-    # Any verastalder-specific git settings can be added here
+    # Add any verastalder-specific git settings here
+    # For example, signing keys or custom templates
   };
 }
