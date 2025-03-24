@@ -2,11 +2,13 @@
   imports = [
     ./git
     ./shell.nix
+    # ./applications.nix
   ];
 
-  # home.sessionVariables = {
-  #   ANDROID_SDK_ROOT = "$HOME/Library/Android/sdk";
-  # };
+  home.sessionVariables = {
+    JAVA_HOME = "${pkgs.openjdk}";
+    # ANDROID_SDK_ROOT = "$HOME/Library/Android/sdk";
+  };
 
   # home.sessionPath = [
   #   "/usr/local/texlive/2022"
@@ -15,8 +17,54 @@
   # ];
 
   home.packages = with pkgs; [
-    home-manager # system package manager
+    _1password-cli
+    # _1password-gui
+    asciidoctor
+    bat
+    bottom
+    broot
     comma # any cli you may need
+    duf
+    dust
+    exiv2
+    eza
+    fd
+    ffmpeg
+    gh
+    glow
+    gnupg
+    hexyl
+    home-manager # system package manager
+    htop
+    httpie
+    hub
+    hyperfine
+    manix
+    maven
+    mosh
+    mtr
+    ncdu
+    nodejs
+    nodejs
+    nodePackages."@angular/cli"
+    nodePackages.pnpm
+    nodePackages.prettier
+    nodePackages.typescript
+    openjdk
+    pandoc
+    procs
+    python39
+    ripgrep
+    speedtest-cli
+    tealdeer
+    texlive.combined.scheme-full
+    tokei
+    wget
+    sherlock
+
+    # Old casks
+    # appcleaner
+    raycast
   ];
 
   # Let Home Manager install and manage itself
@@ -31,4 +79,6 @@
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "22.05";
+
+  # The shell configuration has been moved to modules/darwin/system.nix
 }

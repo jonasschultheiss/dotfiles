@@ -25,7 +25,7 @@
     ...
   }: let
     # Current system username
-    username = "verastalder"; # Update this to match your username
+    username = "jonasschultheiss"; # Update this to match your username
 
     # System architecture
     system = "aarch64-darwin"; # Change to x86_64-darwin if you're on Intel
@@ -47,9 +47,11 @@
         # Make home-manager work with nix-darwin
         home-manager.darwinModules.home-manager
         {
+          nixpkgs.config.allowUnfree = true;
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
+            extraSpecialArgs = { inherit inputs; };
             users.${username} = import ./modules/home;
           };
         }

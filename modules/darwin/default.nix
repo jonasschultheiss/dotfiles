@@ -5,8 +5,9 @@
 }: {
   imports = [
     ./system.nix
-    ./homebrew.nix # Assuming we'll create this from the existing homebrew.nix
-    ./macos.nix # Assuming we'll create this from the existing macos.nix
+    ./macos.nix
+    # ./homebrew.nix
+    ./aerospace.nix
   ];
 
   # These are the core settings that should be in the default darwin module
@@ -31,6 +32,9 @@
   # Fix for Nix build user group ID mismatch
   # This is needed when the nixbld group has GID 350 instead of the expected 30000
   ids.gids.nixbld = 350;
+
+  # Including security settings directly from security.nix
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
   system.stateVersion = 4;

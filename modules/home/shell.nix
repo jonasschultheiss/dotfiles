@@ -3,7 +3,7 @@
     # Apps... but better
     git = "hub";
     ls = "eza";
-    cat = "bat";
+    # cat = "bat";
     find = "fd";
 
     # ls
@@ -46,7 +46,7 @@
     gfm = "git findmessage";
     p = "pnpm";
     y = "yarn";
-    reload-switch = "darwin-rebuild switch --flake ~/.config/nixpkgs#verastalder";
+    reload-switch = "darwin-rebuild switch --flake ~/.config/nixpkgs#jonasschultheiss";
   };
 in {
   home.packages = with pkgs; [
@@ -66,6 +66,7 @@ in {
 
   programs.starship = {
     enable = true;
+    enableFishIntegration = true;
     settings = {
       format = "$battery$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$python$character";
 
@@ -106,34 +107,17 @@ in {
     enable = true;
 
     shellInit = ''
-      # Initialize homebrew
-      eval (/opt/homebrew/bin/brew shellenv)
+      # Homebrew is no longer managed through nix-darwin
 
       # Configure Java
-      # TODO: Add a version manager for openjdk versions
-      # fish_add_path /opt/homebrew/opt/openjdk@17/bin
-      set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk@17/include"
-      set -gx JAVA_HOME /opt/homebrew/opt/openjdk@17
-      set -gx PATH $JAVA_HOME/bin $PATH
-
+      # set -gx JAVA_HOME "${pkgs.openjdk17}"
+      # set -gx PATH $JAVA_HOME/bin $PATH
 
       set -gx CHROME_BIN "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
 
-
       # Configure PNPM
-      set -gx PNPM_HOME "/Users/verastalder/Library/pnpm"
+      set -gx PNPM_HOME "/Users/jonasschultheiss/Library/pnpm"
       set -gx PATH "$PNPM_HOME" $PATH
-
-      starship init fish | source
-
-      # Check if NVM has a default version, if not install LTS
-      if test -e ~/.nvm/alias/default
-        nvm use default >/dev/null 2>&1
-      else
-        echo "No default Node.js version found. Installing LTS version..."
-        # Source NVM and run multiple commands within the same bass call
-        bass "source /opt/homebrew/opt/nvm/nvm.sh --no-use && nvm install --lts && nvm alias default 'lts/*' && nvm use default"
-      end
 
       # Disable fish greeting
       set -g fish_greeting ""

@@ -7,12 +7,12 @@
 
   programs.git = {
     enable = true;
-    userName = "verastalder";
+    userName = "jonasschultheiss";
+    userEmail = "complaint@jonasschultheiss.dev";
     package = pkgs.gitAndTools.gitFull;
 
     signing = {
-      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIIAa+UTL6oKU6LYkj4WfTrQafma8ID6sWT9pWtTyrVP";
-
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIEkKRKYGIagUWR53s7ZH5lrn7O1ALWqbjALwrIm13Rv";
       signByDefault = true;
     };
 
@@ -25,6 +25,12 @@
       "yarn-debug.log*"
       "yarn-error.log*"
       ".pnpm-debug.log*"
+      ".vscode/"
+      "node_modules/"
+      "dist/"
+      "build/"
+      ".env"
+      ".env.local"
     ];
 
     aliases = {
@@ -37,25 +43,62 @@
     };
 
     extraConfig = {
-      # SSH signing
-      # test
-      commit.gpgsign = true;
-      gpg.format = "ssh";
-      gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-      gpg.ssh.allowedSignersFile = builtins.toPath ./allowed-signers;
+      commit = {
+        gpgsign = true;
+        template = builtins.toPath ./git-message;
+      };
 
-      commit.template = builtins.toPath ./git-message;
+      gpg = {
+        format = "ssh";
+        ssh = {
+          program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+          allowedSignersFile = builtins.toPath ./allowed-signers;
+        };
+      };
 
-      # If no upstream branch is specified, push to the branch with the same
-      # name as the current branch
-      push.default = "current";
+      push = {
+        default = "simple";
+        autoSetupRemote = true;
+        followTags = true;
+      };
 
       core = {
         editor = "cursor --wait";
         pager = "diff-so-fancy | less --tabs=4 -RFX";
+        excludesfile = "~/.gitignore";
       };
 
+      column.ui = "auto";
+      branch.sort = "-committerdate";
+      tag.sort = "version:refname";
       init.defaultBranch = "main";
+
+      diff = {
+        algorithm = "histogram";
+        colorMoved = "plain";
+        mnemonicPrefix = true;
+        renames = true;
+      };
+
+      fetch = {
+        prune = true;
+        pruneTags = true;
+        all = true;
+      };
+
+      help.autocorrect = "prompt";
+
+      rerere = {
+        enabled = true;
+        autoupdate = true;
+      };
+
+      rebase = {
+        autoSquash = true;
+        autoStash = true;
+        updateRefs = true;
+      };
+
       pull.rebase = true;
       color.ui = true;
 
