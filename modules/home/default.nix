@@ -3,6 +3,7 @@
     ./git
     ./shell.nix
     # ./applications.nix
+    ./modules/terraform
   ];
 
   home.sessionVariables = {
@@ -10,11 +11,12 @@
     # ANDROID_SDK_ROOT = "$HOME/Library/Android/sdk";
   };
 
-  # home.sessionPath = [
+  home.sessionPath = [
+    "$HOME/Library/Python/3.10/bin"
   #   "/usr/local/texlive/2022"
   #   "$ANDROID_SDK_ROOT/emulator"
   #   "$ANDROID_SDK_ROOT/platform-tools"
-  # ];
+  ];
 
   home.packages = with pkgs; [
     _1password-cli
@@ -50,10 +52,11 @@
     nodePackages.pnpm
     nodePackages.prettier
     nodePackages.typescript
+    nodePackages."@nestjs/cli"
     openjdk
     pandoc
     procs
-    python39
+    python310
     ripgrep
     speedtest-cli
     tealdeer
@@ -61,10 +64,11 @@
     tokei
     wget
     sherlock
-
+    poppler-utils
     # Old casks
     # appcleaner
     raycast
+    pip
   ];
 
   # Let Home Manager install and manage itself

@@ -7,7 +7,7 @@
     ./system.nix
     ./macos.nix
     # ./homebrew.nix
-    ./aerospace.nix
+    # ./aerospace.nix
   ];
 
   # These are the core settings that should be in the default darwin module

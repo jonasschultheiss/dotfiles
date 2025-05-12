@@ -69,7 +69,6 @@
       "keepassxc"
       "languagetool"
       "linear-linear"
-      "logi-options+"
       "malwarebytes"
       "microsoft-teams"
       "ngrok"

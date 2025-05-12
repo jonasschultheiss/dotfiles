@@ -57,7 +57,8 @@
       ShowPathbar = true;
       AppleShowAllExtensions = true;
       FXEnableExtensionChangeWarning = false;
-      CreateDesktop = false;
+      CreateDesktop = true;
+      FXPreferredViewStyle = "Nlsv";
     };
 
     loginwindow = {
