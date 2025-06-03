@@ -17,8 +17,9 @@ final: prev: {
         # Ensure we use the correct provider registry info
         provider-source-address = "registry.terraform.io/Telmate/proxmox";
 
-        # Placeholder vendor hash, replace with the one printed by Nix on first build
-        vendorHash = prev.lib.fakeSha256;
+        # Temporary placeholder so evaluation succeeds; rebuild once and Nix will
+        # fail with a message that shows the correct hash. Replace it afterwards.
+        vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
 
         # Update any version constraints
         meta =
