@@ -30,9 +30,12 @@
     # System architecture
     system = "aarch64-darwin"; # Change to x86_64-darwin if you're on Intel
 
-    # Configure nixpkgs
+    # Define overlays here so they can be reused
+    overlays = [(import ./overlays.nix)];
+
+    # Configure nixpkgs with overlays + allowUnfree
     pkgs = import nixpkgs {
-      inherit system;
+      inherit system overlays;
       config = {
         allowUnfree = true;
       };
@@ -40,7 +43,13 @@
   in {
     darwinConfigurations.${username} = darwin.lib.darwinSystem {
       inherit system;
+      # Pass overlays to all modules via an early module
       modules = [
+        # Make overlays available system-wide
+        ({...}: {
+          nixpkgs.overlays = overlays;
+        })
+
         # nix-darwin base configuration
         ./modules/darwin
 
@@ -51,7 +60,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs = {inherit inputs overlays;};
             users.${username} = import ./modules/home;
           };
         }
@@ -64,5 +73,8 @@
         pkgs.nixfmt
       ];
     };
+
+    # Expose overlays so other flakes can consume them
+    inherit overlays;
   };
 }
