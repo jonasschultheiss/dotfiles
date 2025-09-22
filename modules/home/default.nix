@@ -3,8 +3,16 @@
     ./git
     ./shell.nix
     # ./applications.nix
-    ./modules/terraform
+    # ./modules/terraform
   ];
+
+  # Enable Terraform module
+  # modules.terraform = {
+  #   enable = true;
+  #   enableTerraformDocs = true;
+  #   enableTFLint = true;
+  #   enableCheckov = true;
+  # };
 
   home.sessionVariables = {
     JAVA_HOME = "${pkgs.openjdk}";
@@ -13,15 +21,14 @@
 
   home.sessionPath = [
     "$HOME/Library/Python/3.10/bin"
-  #   "/usr/local/texlive/2022"
-  #   "$ANDROID_SDK_ROOT/emulator"
-  #   "$ANDROID_SDK_ROOT/platform-tools"
+    #   "/usr/local/texlive/2022"
+    #   "$ANDROID_SDK_ROOT/emulator"
+    #   "$ANDROID_SDK_ROOT/platform-tools"
   ];
 
   home.packages = with pkgs; [
     _1password-cli
-    # _1password-gui
-    asciidoctor
+    # _1password-guida
     bat
     bottom
     broot
@@ -46,10 +53,10 @@
     mosh
     mtr
     ncdu
-    nodejs
+    rustup
     nodejs
     nodePackages."@angular/cli"
-    nodePackages.pnpm
+    pnpm
     nodePackages.prettier
     nodePackages.typescript
     nodePackages."@nestjs/cli"
@@ -68,7 +75,16 @@
     # Old casks
     # appcleaner
     raycast
-    pip
+    tenv
+    # Nix tooling
+    alejandra # Nix formatter
+    # statix    # Nix linter
+    deadnix # Find unused code/variables in Nix
+    nixd # Nix language server - replacing nil
+    nix-prefetch-github # For updating terraform provider overlays
+    ghostscript
+    google-chrome
+    packer
   ];
 
   # Let Home Manager install and manage itself
