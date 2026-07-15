@@ -83,7 +83,7 @@
       "iterm2"
       "keepassxc"
       "languagetool-desktop"
-      "linear-linear"
+      "linear"
       "malwarebytes"
       "microsoft-teams"
       "ngrok"
