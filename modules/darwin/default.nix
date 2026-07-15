@@ -22,6 +22,12 @@
     # Enable automatic store optimization
     optimise.automatic = true;
 
+    gc = {
+      automatic = true;
+      interval = { Weekday = 0; Hour = 3; Minute = 15; };
+      options = "--delete-older-than 30d";
+    };
+
     # Add ability to install packages for both Intel and ARM macs if needed
     extraOptions =
       lib.optionalString (pkgs.stdenv.hostPlatform.system == "aarch64-darwin") ''
