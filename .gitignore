@@ -2,6 +2,11 @@
 result
 result-*
 
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+
 # Flakes
 .direnv
 .pre-commit-config.yaml
