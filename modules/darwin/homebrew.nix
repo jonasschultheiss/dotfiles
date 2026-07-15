@@ -6,7 +6,21 @@
       autoUpdate = true;
       upgrade = true;
     };
+    taps = [
+      "hashicorp/tap"
+      "pulumi/tap"
+      "siderolabs/tap"
+    ];
     brews = [
+      "hashicorp/tap/tfstacks"
+      "pulumi/tap/pulumi"
+      "ghcup"
+      "stylish-haskell"
+      "cabal-install"
+      "kubernetes-cli"
+      "siderolabs/tap/talosctl"
+      "cloudflared"
+      "helm"
       # "angular-cli"
       # "asciidoctor"
       # "bat"
@@ -49,25 +63,26 @@
     casks = [
       # "1password-cli"
       "appcleaner"
+      "libreoffice"
       "brave-browser"
       "cursor"
       "deepl"
       "discord"
-      "docker"
+      "docker-desktop"
       "figma"
-      "font-geist"
-      "font-geist-mono"
-      "font-hack"
-      "font-hack-nerd-font"
-      "font-inter"
-      "font-jetbrains-mono"
-      "font-jetbrains-mono-nerd-font"
+      # "font-geist"
+      # "font-geist-mono"
+      # "font-hack"
+      # "font-hack-nerd-font"
+      # "font-inter"
+      # "font-jetbrains-mono"
+      # "font-jetbrains-mono-nerd-font"
       "font-roboto"
       "github"
       "insomnia"
       "iterm2"
       "keepassxc"
-      "languagetool"
+      "languagetool-desktop"
       "linear-linear"
       "malwarebytes"
       "microsoft-teams"
@@ -78,15 +93,14 @@
       "spotify"
       "tableplus"
       "teamviewer"
-      "todoist"
+      "todoist-app"
       "visual-studio-code"
-      "whatsapp"
     ];
     masApps = {
-      "Microsoft Excel" = 462058435;
-      "Microsoft PowerPoint" = 462062816;
-      "Microsoft Word" = 462054704;
-      "Xcode" = 497799835;
+      # "Microsoft Excel" = 462058435;
+      # "Microsoft PowerPoint" = 462062816;
+      # "Microsoft Word" = 462054704;
+      # "Xcode" = 497799835;
     };
   };
 }

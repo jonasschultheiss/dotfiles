@@ -1,4 +1,11 @@
 {...}: {
+  # Application firewall configuration (replaces alf)
+  networking.applicationFirewall = {
+    enable = true;
+    blockAllIncoming = true;
+    enableStealthMode = true;
+  };
+
   system.defaults = {
     LaunchServices = {
       LSQuarantine = false;
@@ -31,11 +38,6 @@
 
     SoftwareUpdate = {
       AutomaticallyInstallMacOSUpdates = true;
-    };
-
-    alf = {
-      globalstate = 1;
-      stealthenabled = 1;
     };
 
     dock = {
@@ -92,9 +94,9 @@
     };
   };
 
-  # Add this to make the settings take effect immediately without logout
-  system.activationScripts.postUserActivation.text = ''
-    # Following line should allow us to avoid a logout/login cycle
-    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+  # Replace deprecated postUserActivation with proper activation script that runs as root
+  system.activationScripts.extraActivation.text = ''
+    # Activate settings for the primary user
+    sudo -u jonasschultheiss /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   '';
 }

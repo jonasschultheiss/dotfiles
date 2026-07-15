@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.packages = with pkgs.gitAndTools; [
+  home.packages = with pkgs; [
     diff-so-fancy
     tig
     gh
@@ -7,12 +7,11 @@
 
   programs.git = {
     enable = true;
-    userName = "jonasschultheiss";
-    userEmail = "complaint@jonasschultheiss.dev";
-    package = pkgs.gitAndTools.gitFull;
+    package = pkgs.gitFull;
 
     signing = {
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIEkKRKYGIagUWR53s7ZH5lrn7O1ALWqbjALwrIm13Rv";
+      format = "ssh";
       signByDefault = true;
     };
 
@@ -33,16 +32,21 @@
       ".env.local"
     ];
 
-    aliases = {
-      l = "log --pretty=oneline -n 50 --graph --abbrev-commit";
-      save = "!git add -A && git commit -v -m 'SAVEPOINT'";
-      undo = "reset HEAD~1 --mixed";
-      wipe = "!git add -A && git commit --no-gpg-sign -qm 'WIPE SAVEPOINT' --no-verify && git reset HEAD~1 --hard";
-      findcommit = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f";
-      findmessage = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f";
-    };
+    settings = {
+      user = {
+        name = "jonasschultheiss";
+        email = "complaint@jonasschultheiss.dev";
+      };
 
-    extraConfig = {
+      alias = {
+        l = "log --pretty=oneline -n 50 --graph --abbrev-commit";
+        save = "!git add -A && git commit -v -m 'SAVEPOINT'";
+        undo = "reset HEAD~1 --mixed";
+        wipe = "!git add -A && git commit --no-gpg-sign -qm 'WIPE SAVEPOINT' --no-verify && git reset HEAD~1 --hard";
+        findcommit = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f";
+        findmessage = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f";
+      };
+
       commit = {
         gpgsign = true;
         template = builtins.toPath ./git-message;

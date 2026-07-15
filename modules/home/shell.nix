@@ -28,7 +28,7 @@
   };
 
   shellAbbrs = {
-    gs = "git status -sb";
+    # gs = "git status -sb";
     ga = "git add";
     gc = "git commit";
     gcm = "git commit -m";
@@ -49,6 +49,11 @@
     reload-switch = "darwin-rebuild switch --flake ~/.config/nixpkgs#jonasschultheiss";
   };
 in {
+  home.sessionPath = [
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
+  ];
+
   home.packages = with pkgs; [
     fzf
     zoxide
@@ -108,6 +113,9 @@ in {
 
     shellInit = ''
       # Homebrew is no longer managed through nix-darwin
+
+      # Ensure Homebrew is in PATH
+      set -gx PATH "/opt/homebrew/bin" "/opt/homebrew/sbin" $PATH
 
       # Configure Java
       # set -gx JAVA_HOME "${pkgs.openjdk17}"
@@ -236,5 +244,8 @@ in {
     autosuggestion.enable = true;
     enableCompletion = true;
     history.extended = true;
+    initContent = ''
+      export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+    '';
   };
 }

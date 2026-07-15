@@ -6,9 +6,12 @@
   imports = [
     ./system.nix
     ./macos.nix
-    # ./homebrew.nix
+    ./homebrew.nix
     # ./aerospace.nix
   ];
+
+  # Set the primary user for nix-darwin migration
+  system.primaryUser = "jonasschultheiss";
 
   # These are the core settings that should be in the default darwin module
   nix = {
@@ -21,13 +24,21 @@
 
     # Add ability to install packages for both Intel and ARM macs if needed
     extraOptions =
-      lib.optionalString (pkgs.system == "aarch64-darwin") ''
+      lib.optionalString (pkgs.stdenv.hostPlatform.system == "aarch64-darwin") ''
         extra-platforms = aarch64-darwin x86_64-darwin
       ''
-      + lib.optionalString (pkgs.system == "x86_64-darwin") ''
+      + lib.optionalString (pkgs.stdenv.hostPlatform.system == "x86_64-darwin") ''
         extra-platforms = x86_64-darwin aarch64-darwin
       '';
   };
+
+  # Ensure Homebrew binaries are on the system PATH for all shells (including sudo)
+  environment.systemPath = [
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
+    "/usr/local/bin"
+    "/usr/local/sbin"
+  ];
 
   # Fix for Nix build user group ID mismatch
   # This is needed when the nixbld group has GID 350 instead of the expected 30000

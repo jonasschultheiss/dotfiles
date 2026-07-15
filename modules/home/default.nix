@@ -41,6 +41,7 @@
     ffmpeg
     gh
     glow
+    helm-docs
     gnupg
     hexyl
     home-manager # system package manager
@@ -55,16 +56,16 @@
     ncdu
     rustup
     nodejs
-    nodePackages."@angular/cli"
+    telegram-desktop
     pnpm
-    nodePackages.prettier
-    nodePackages.typescript
-    nodePackages."@nestjs/cli"
+    prettier
+    typescript
     openjdk
     pandoc
     procs
-    python310
+    python3
     ripgrep
+    wireshark
     speedtest-cli
     tealdeer
     texlive.combined.scheme-full
@@ -76,6 +77,8 @@
     # appcleaner
     raycast
     tenv
+    ghc
+    hlint
     # Nix tooling
     alejandra # Nix formatter
     # statix    # Nix linter
